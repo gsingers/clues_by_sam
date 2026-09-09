@@ -1,0 +1,829 @@
+<title>Clues by Sam Field Manual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+
+<style>
+:root{
+  --ground:#E7EBEE; --panel:#FBFCFD; --panel-2:#EDF1F4;
+  --ink:#0E1519; --ink-2:#3D4A52; --ink-3:#6D7C85;
+  --rule:#C4CFD6; --rule-2:#9DACB6;
+  --crim:#B0403A; --crim-bg:#F0DCDA;
+  --inno:#2C6F7B; --inno-bg:#D6E7EA;
+  --caution:#8A6612; --caution-bg:#F1E7C6;
+  --shade:#DCE4E9;
+  --t1:#C98A16; --t2:#7B5CC4; --t3:#B94A86;
+
+  --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0D1317; --panel:#151D22; --panel-2:#1B242A;
+    --ink:#E4EBEF; --ink-2:#AAB9C1; --ink-3:#7A8C95;
+    --rule:#2A363E; --rule-2:#42535D;
+    --crim:#E58079; --crim-bg:#3B2220;
+    --inno:#63B2BE; --inno-bg:#122E33;
+    --caution:#D9AE4E; --caution-bg:#2F2718;
+    --shade:#212B32;
+    --t1:#E0B44A; --t2:#A28BE0; --t3:#DD7CB0;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0D1317; --panel:#151D22; --panel-2:#1B242A;
+  --ink:#E4EBEF; --ink-2:#AAB9C1; --ink-3:#7A8C95;
+  --rule:#2A363E; --rule-2:#42535D;
+  --crim:#E58079; --crim-bg:#3B2220;
+  --inno:#63B2BE; --inno-bg:#122E33;
+  --caution:#D9AE4E; --caution-bg:#2F2718;
+  --shade:#212B32;
+  --t1:#E0B44A; --t2:#A28BE0; --t3:#DD7CB0;
+}
+
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:28px 20px 64px}
+
+.mast{border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:22px}
+.kicker{font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+.mast h1{font-family:var(--f-display);font-weight:700;font-size:clamp(2rem,5vw,3.1rem);line-height:1.02;letter-spacing:-.025em;margin:.18em 0 .28em;text-wrap:balance}
+.dek{font-size:1.02rem;color:var(--ink-2);max-width:62ch;margin:0}
+.ladder{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;margin-top:16px;font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em}
+.ladder .lab{color:var(--ink-3);margin-right:4px}
+.ladder i{font-style:normal;color:var(--ink-3)}
+.tier{color:var(--ink-2)}
+.tier.t4{color:var(--ink)}
+.tier.t5{color:var(--crim)}
+.tier.t6{color:var(--crim);font-weight:600}
+
+.sheet{display:grid;grid-template-columns:repeat(12,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.p{background:var(--panel);padding:18px 20px 20px;grid-column:span 12;min-width:0}
+.p--alt{background:var(--panel-2)}
+@media(min-width:860px){
+  .s4{grid-column:span 4}.s5{grid-column:span 5}.s6{grid-column:span 6}
+  .s7{grid-column:span 7}.s8{grid-column:span 8}
+}
+.part{grid-column:span 12;background:var(--shade);padding:7px 20px;font-family:var(--f-mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-3)}
+.p h2{font-family:var(--f-display);font-weight:700;font-size:1.06rem;letter-spacing:-.01em;margin:0 0 2px;text-wrap:balance}
+.p .sub{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin:0 0 12px}
+.p p{margin:0 0 10px;color:var(--ink-2)}
+.p p:last-child{margin-bottom:0}
+.p strong{color:var(--ink);font-weight:600}
+code,.co{font-family:var(--f-mono);font-size:.86em;font-weight:500;color:var(--ink);background:var(--shade);padding:1px 5px;border-radius:2px;white-space:nowrap}
+
+.axiom{grid-column:span 12;background:var(--ink);color:var(--ground);padding:20px}
+.axiom h2{font-family:var(--f-display);font-weight:700;font-size:clamp(1.1rem,2.6vw,1.5rem);margin:0 0 6px;letter-spacing:-.015em}
+.axiom p{margin:0;color:var(--ground);opacity:.82;max-width:78ch}
+.axiom .sub{color:var(--ground);opacity:.55;margin-bottom:8px}
+
+.terms{margin:0;display:grid;gap:11px}
+.term{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:baseline}
+.term dt{font-family:var(--f-mono);font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap}
+.term dd{margin:0;color:var(--ink-2);font-size:.95rem}
+.trap{grid-column:1/-1;font-family:var(--f-mono);font-size:11px;line-height:1.45;color:var(--caution);background:var(--caution-bg);padding:5px 8px;border-left:2px solid var(--caution)}
+
+.figrow{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start}
+.fig{margin:0;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.board{display:grid;grid-template-columns:repeat(4,26px);gap:2px}
+.board.sm{grid-template-columns:repeat(4,20px)}
+.mini3{display:grid;grid-template-columns:repeat(3,24px);gap:2px}
+.board2{display:grid;grid-template-columns:repeat(2,30px);gap:2px}
+.cell{aspect-ratio:1;display:grid;place-items:center;font-family:var(--f-mono);font-size:11px;font-weight:500;background:var(--shade);color:var(--ink-3);border-radius:1px}
+.cell.v2{background:var(--panel-2);color:var(--ink-3);box-shadow:inset 0 0 0 1px var(--rule)}
+.cell.v3{background:var(--shade);color:var(--ink-2)}
+.cell.v4,.cell.v5{background:var(--rule);color:var(--ink)}
+.cell.v8{background:var(--rule-2);color:var(--panel);font-weight:600}
+.cell.crim{background:var(--crim-bg);color:var(--crim);font-weight:600}
+.cell.inno{background:var(--inno-bg);color:var(--inno);font-weight:600}
+.cell.band{background:var(--caution-bg);color:var(--caution)}
+.cell.q{background:transparent;box-shadow:inset 0 0 0 1.5px var(--caution);color:var(--caution);font-weight:600}
+.cell.on{background:var(--rule-2)}
+.cell.off{background:var(--panel-2);box-shadow:inset 0 0 0 1px var(--rule)}
+.cell.ctr{background:var(--ink);color:var(--ground)}
+.cell.edge{background:var(--rule-2);color:var(--panel);font-weight:600}
+.cell.int{background:var(--panel-2);color:var(--ink-3);box-shadow:inset 0 0 0 1px var(--rule)}
+figcaption{font-family:var(--f-mono);font-size:10.5px;line-height:1.5;color:var(--ink-3);max-width:22ch}
+figcaption b{color:var(--ink-2);font-weight:600}
+
+.rules{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.rules li{display:grid;grid-template-columns:auto 1fr;gap:10px;color:var(--ink-2);font-size:.95rem}
+.rules li::before{content:"";width:6px;height:6px;margin-top:.52em;background:var(--inno);border-radius:50%}
+.rules.warn li::before{background:var(--caution)}
+.steps{margin:0;padding:0;list-style:none;counter-reset:s;display:grid;gap:10px}
+.steps li{display:grid;grid-template-columns:auto 1fr;gap:10px;color:var(--ink-2);font-size:.95rem;counter-increment:s}
+.steps li::before{content:counter(s);font-family:var(--f-mono);font-size:10px;font-weight:600;color:var(--inno);background:var(--inno-bg);width:18px;height:18px;display:grid;place-items:center;margin-top:.24em;border-radius:2px}
+
+.scroll{overflow-x:auto}
+.t{width:100%;border-collapse:collapse;font-size:.9rem;min-width:340px}
+.t th{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:0 10px 6px 0;border-bottom:1px solid var(--rule-2);font-weight:500}
+.t td{padding:8px 10px 8px 0;border-bottom:1px solid var(--rule);color:var(--ink-2);vertical-align:top}
+.t tr:last-child td{border-bottom:0}
+.t .k{font-family:var(--f-mono);font-size:11px;color:var(--ink);font-weight:500}
+.t .go{color:var(--inno);font-weight:600}
+.t .no{color:var(--caution);font-weight:600}
+
+.banks{display:grid;gap:14px}
+.bank{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}
+.chips{display:flex;gap:3px;margin-top:.3em}
+.chip{width:13px;height:13px;border-radius:2px;background:var(--rule-2)}
+.chip.a{background:var(--crim)}
+.chip.b{background:var(--inno)}
+.chip.c{background:var(--caution)}
+.chip.d{border:1.5px dashed var(--ink-3);background:transparent}
+.bank h3{font-family:var(--f-display);font-size:.95rem;font-weight:600;margin:0 0 2px;color:var(--ink)}
+.bank p{margin:0;font-size:.92rem}
+.role{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+
+.calc{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.calcgrid{display:grid;grid-template-columns:repeat(4,30px);gap:2px}
+.cbtn{aspect-ratio:1;border:0;padding:0;cursor:pointer;border-radius:1px;font-family:var(--f-mono);font-size:10px;font-weight:500;background:var(--shade);color:var(--ink-3)}
+.cbtn:hover{background:var(--rule)}
+.cbtn[aria-pressed="true"]{background:var(--crim);color:#fff;font-weight:600}
+.cbtn:focus-visible{outline:2px solid var(--inno);outline-offset:2px}
+.readout{font-family:var(--f-mono);font-size:12px;line-height:1.7;color:var(--ink-2)}
+.readout b{color:var(--ink);font-weight:600}
+.readout .big{font-size:20px;color:var(--crim);font-weight:600}
+
+.flow{display:grid;gap:0;margin:0;padding:0;list-style:none}
+.flow li{padding:12px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:auto 1fr;gap:12px}
+.flow li:last-child{border-bottom:0;padding-bottom:0}
+.flow li:first-child{padding-top:0}
+.flow .n{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--inno);padding-top:.2em}
+.flow h3{font-family:var(--f-display);font-size:.98rem;font-weight:600;margin:0 0 3px;color:var(--ink)}
+.flow p{margin:0;font-size:.93rem}
+
+/* ---------- worked example ---------- */
+.ex-lead{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start}
+.roster{font-family:var(--f-mono);font-size:10.5px;line-height:1.7;color:var(--ink-2);border-left:2px solid var(--rule-2);padding-left:12px}
+.roster b{color:var(--ink);font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-family:var(--f-mono);font-size:10.5px;color:var(--ink-3);margin-top:14px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:12px;height:12px;border-radius:2px;display:inline-block}
+.sw.i{background:var(--inno-bg);box-shadow:inset 0 0 0 1px var(--inno)}
+.sw.c{background:var(--crim-bg);box-shadow:inset 0 0 0 1px var(--crim)}
+.sw.u{background:var(--shade)}
+.sw.g1{background:var(--t1)}
+.sw.g2{background:var(--t2)}
+.sw.g3{background:var(--t3)}
+
+#steps{display:grid;gap:0}
+.step{display:grid;grid-template-columns:auto 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--rule);align-items:start}
+.step:last-child{border-bottom:0;padding-bottom:0}
+.step:first-child{padding-top:0}
+@media(max-width:620px){.step{grid-template-columns:1fr;gap:12px}}
+.sb{display:grid;grid-template-columns:repeat(4,23px);gap:2px}
+.sc{aspect-ratio:1;position:relative;display:grid;place-items:center;font-family:var(--f-mono);font-size:9.5px;font-weight:600;background:var(--shade);color:var(--ink-3);border-radius:1px;overflow:hidden}
+.sc.i{background:var(--inno-bg);color:var(--inno)}
+.sc.c{background:var(--crim-bg);color:var(--crim)}
+.sc .tg{position:absolute;top:0;right:0;width:0;height:0;border-left:8px solid transparent}
+.sc .tg.g1{border-top:8px solid var(--t1)}
+.sc .tg.g2{border-top:8px solid var(--t2)}
+.sc .tg.g3{border-top:8px solid var(--t3)}
+.step .body h3{font-family:var(--f-display);font-size:1rem;font-weight:600;margin:0 0 4px;color:var(--ink);text-wrap:balance}
+.step .eyebrow{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 3px}
+.step .quote{font-family:var(--f-mono);font-size:11px;line-height:1.5;color:var(--ink-2);background:var(--shade);padding:6px 9px;border-radius:2px;margin:0 0 8px}
+.step .quote b{color:var(--ink);font-weight:600}
+.step .body p{margin:0 0 8px;font-size:.94rem}
+.step .body p:last-child{margin-bottom:0}
+.tagnote{font-family:var(--f-mono);font-size:10.5px;line-height:1.5;color:var(--ink);background:var(--panel-2);border-left:2px solid var(--t2);padding:6px 9px;margin-top:8px}
+.p--alt .tagnote{background:var(--panel)}
+
+.foot{margin-top:20px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;color:var(--ink-3)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="kicker">Deduction reference · 4 × 5 board · columns A–D · rows 1–5</div>
+    <h1>Clues by Sam Field Manual</h1>
+    <p class="dek">Everything that fires more than once, in the order you'll reach for it. Built for the back half of the week, when the clue text stops being the hard part and the interactions start.</p>
+    <div class="ladder">
+      <span class="lab">Difficulty ladder</span>
+      <span class="tier t1">Easy</span><i>›</i>
+      <span class="tier t2">Medium</span><i>›</i>
+      <span class="tier t3">Tricky</span><i>›</i>
+      <span class="tier t4">Hard</span><i>›</i>
+      <span class="tier t5">Brutal</span><i>›</i>
+      <span class="tier t6">Evil</span>
+    </div>
+  </header>
+
+  <div class="sheet">
+
+    <section class="axiom">
+      <p class="sub">The premise everything rests on</p>
+      <h2>Every clue is true — including clues from criminals.</h2>
+      <p>There is no lying layer. This is constraint satisfaction, not interrogation. It follows that a clue never expires: one you used on move 3 is still binding on move 20, and the intended crack on a hard board usually needs an early clue re-read in light of something learned later. Dim a clue only when it is genuinely exhausted, not when it is merely unhelpful right now.</p>
+    </section>
+
+    <div class="part">Rules &amp; geometry</div>
+
+    <section class="p s7">
+      <h2>Vocabulary, and where it bites</h2>
+      <p class="sub">Misreads outnumber missed deductions</p>
+      <dl class="terms">
+        <div class="term"><dt>neighbors</dt><dd>All 8 surrounding cells, diagonals included.</dd></div>
+        <div class="term">
+          <dt>connected</dt>
+          <dd>A chain of <strong>orthogonal</strong> adjacency. Along a single row or column it means <em>no innocents between any two criminals in that line</em>. A group of one counts as connected.</dd>
+          <div class="trap">Two graphs on one board. Diagonal cells are neighbors but are never directly connected.</div>
+        </div>
+        <div class="term"><dt>above / below</dt><dd>Anywhere in the same column. <span class="co">left</span> / <span class="co">right</span>: anywhere in the same row.</dd></div>
+        <div class="term">
+          <dt>directly above</dt>
+          <dd>The one immediately adjacent cell — <em>not</em> the whole line.</dd>
+          <div class="trap">One word turns a line clue into an adjacency clue. Check for "directly" every time.</div>
+        </div>
+        <div class="term">
+          <dt>edges</dt>
+          <dd>Includes the corners — <strong>14 of 20 cells</strong>. Only B2–B4 and C2–C4 are interior.</dd>
+          <div class="trap">An edge clue is nearly board-wide. Its power comes from how much is already placed.</div>
+        </div>
+        <div class="term"><dt>in between</dt><dd>Strictly between — excludes the two named people.</dd></div>
+        <div class="term"><dt>all X are Y</dt><dd>Carries existential import — also asserts <strong>at least one X exists</strong>.</dd></div>
+        <div class="term"><dt>both</dt><dd>Exactly 2. <span class="co">any</span> is conditional and promises no existence.</dd></div>
+        <div class="term"><dt>common neighbors</dt><dd>Neighbors of both — excludes the two referenced people themselves.</dd></div>
+        <div class="term"><dt>share</dt><dd>"Have in common." <span class="co">in total</span> means the sum across the named groups.</dd></div>
+        <div class="term">
+          <dt>the most</dt>
+          <dd>Always <em>uniquely</em> the most — nobody ties.</dd>
+        </div>
+        <div class="term">
+          <dt>more than</dt>
+          <dd>Does <strong>not</strong> require the lesser side to have any at all.</dd>
+        </div>
+        <div class="term"><dt>if A then B</dt><dd>Not a biconditional. It does give you the contrapositive: not B → not A.</dd></div>
+      </dl>
+    </section>
+
+    <section class="p p--alt s5">
+      <h2>Two graphs, one board</h2>
+      <p class="sub">Switch modes on the word "connected"</p>
+      <div class="figrow">
+        <figure class="fig">
+          <div class="mini3" role="img" aria-label="All eight surrounding cells shaded">
+            <span class="cell on"></span><span class="cell on"></span><span class="cell on"></span>
+            <span class="cell on"></span><span class="cell ctr">•</span><span class="cell on"></span>
+            <span class="cell on"></span><span class="cell on"></span><span class="cell on"></span>
+          </div>
+          <figcaption><b>NEIGHBORS — 8</b><br>shares an edge or a corner</figcaption>
+        </figure>
+        <figure class="fig">
+          <div class="mini3" role="img" aria-label="Only the four edge-sharing cells shaded">
+            <span class="cell off"></span><span class="cell on"></span><span class="cell off"></span>
+            <span class="cell on"></span><span class="cell ctr">•</span><span class="cell on"></span>
+            <span class="cell off"></span><span class="cell on"></span><span class="cell off"></span>
+          </div>
+          <figcaption><b>ORTHOGONAL — 4</b><br>shares an edge only</figcaption>
+        </figure>
+      </div>
+      <p style="margin-top:14px">Counting clues use the left graph. Connectivity clues use the right one. When you read <em>connected</em>, stop counting and start thinking in blobs and walls.</p>
+    </section>
+
+    <section class="p">
+      <h2>Board geometry worth memorizing</h2>
+      <p class="sub">The grid is only 4 wide — structure does real work</p>
+      <div class="figrow">
+        <figure class="fig">
+          <div class="board" role="img" aria-label="Neighbor counts: corners 3, edges 5, six interior cells 8">
+            <span class="cell v3">3</span><span class="cell v5">5</span><span class="cell v5">5</span><span class="cell v3">3</span>
+            <span class="cell v5">5</span><span class="cell v8">8</span><span class="cell v8">8</span><span class="cell v5">5</span>
+            <span class="cell v5">5</span><span class="cell v8">8</span><span class="cell v8">8</span><span class="cell v5">5</span>
+            <span class="cell v5">5</span><span class="cell v8">8</span><span class="cell v8">8</span><span class="cell v5">5</span>
+            <span class="cell v3">3</span><span class="cell v5">5</span><span class="cell v5">5</span><span class="cell v3">3</span>
+          </div>
+          <figcaption><b>NEIGHBOR COUNT</b><br>corners 3 · edges 5 · interior 8</figcaption>
+        </figure>
+        <figure class="fig">
+          <div class="board" role="img" aria-label="Orthogonal counts: corners 2, edges 3, six interior cells 4">
+            <span class="cell v2">2</span><span class="cell v3">3</span><span class="cell v3">3</span><span class="cell v2">2</span>
+            <span class="cell v3">3</span><span class="cell v4">4</span><span class="cell v4">4</span><span class="cell v3">3</span>
+            <span class="cell v3">3</span><span class="cell v4">4</span><span class="cell v4">4</span><span class="cell v3">3</span>
+            <span class="cell v3">3</span><span class="cell v4">4</span><span class="cell v4">4</span><span class="cell v3">3</span>
+            <span class="cell v2">2</span><span class="cell v3">3</span><span class="cell v3">3</span><span class="cell v2">2</span>
+          </div>
+          <figcaption><b>ORTHOGONAL COUNT</b><br>corners 2 · edges 3 · interior 4</figcaption>
+        </figure>
+        <figure class="fig">
+          <div class="board" role="img" aria-label="Fourteen edge cells around six interior cells">
+            <span class="cell edge">E</span><span class="cell edge">E</span><span class="cell edge">E</span><span class="cell edge">E</span>
+            <span class="cell edge">E</span><span class="cell int">·</span><span class="cell int">·</span><span class="cell edge">E</span>
+            <span class="cell edge">E</span><span class="cell int">·</span><span class="cell int">·</span><span class="cell edge">E</span>
+            <span class="cell edge">E</span><span class="cell int">·</span><span class="cell int">·</span><span class="cell edge">E</span>
+            <span class="cell edge">E</span><span class="cell edge">E</span><span class="cell edge">E</span><span class="cell edge">E</span>
+          </div>
+          <figcaption><b>EDGE vs INTERIOR</b><br>14 edge (corners included) · 6 interior</figcaption>
+        </figure>
+        <div style="flex:1 1 240px;min-width:220px">
+          <ul class="rules">
+            <li>A neighbor-count clue points at its own region: high counts force the B/C interior, low counts force corners and edges.</li>
+            <li>Corners are the most constrained cells on the board — 3 neighbors, 2 ways out. Corner clues collapse to pairs fastest.</li>
+            <li>Columns A and D are entirely edge cells. Rows hold 4, columns hold 5 — the same count clue is tighter on a row.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="p p--alt s8">
+      <h2>The connectivity toolkit</h2>
+      <p class="sub">The only global clue type in the game</p>
+      <div class="figrow">
+        <figure class="fig">
+          <div class="board2" role="img" aria-label="Two diagonal criminals with the two elbow cells marked unknown">
+            <span class="cell crim">C</span><span class="cell q">?</span>
+            <span class="cell q">?</span><span class="cell crim">C</span>
+          </div>
+          <figcaption><b>ELBOW RULE</b><br>diagonal criminals that are connected force <b>≥1 of the two elbows</b></figcaption>
+        </figure>
+        <figure class="fig">
+          <div class="board sm" role="img" aria-label="Criminals in row 1 and row 5 with rows 2 to 4 banded">
+            <span class="cell"></span><span class="cell crim">C</span><span class="cell"></span><span class="cell"></span>
+            <span class="cell band"></span><span class="cell band"></span><span class="cell band"></span><span class="cell band"></span>
+            <span class="cell band"></span><span class="cell band"></span><span class="cell band"></span><span class="cell band"></span>
+            <span class="cell band"></span><span class="cell band"></span><span class="cell band"></span><span class="cell band"></span>
+            <span class="cell"></span><span class="cell"></span><span class="cell crim">C</span><span class="cell"></span>
+          </div>
+          <figcaption><b>CROSSING RULE</b><br>every line strictly between two connected cells holds <b>≥1</b> of that status</figcaption>
+        </figure>
+        <figure class="fig">
+          <div class="board sm" role="img" aria-label="A contiguous run of criminals down a column, blocked by an innocent">
+            <span class="cell"></span><span class="cell inno">I</span><span class="cell"></span><span class="cell"></span>
+            <span class="cell"></span><span class="cell crim">C</span><span class="cell"></span><span class="cell"></span>
+            <span class="cell"></span><span class="cell crim">C</span><span class="cell"></span><span class="cell"></span>
+            <span class="cell"></span><span class="cell q">?</span><span class="cell"></span><span class="cell"></span>
+            <span class="cell"></span><span class="cell q">?</span><span class="cell"></span><span class="cell"></span>
+          </div>
+          <figcaption><b>PREFIX RULE</b><br>along one line, the criminals form a <b>contiguous run</b> — one innocent ends it for good</figcaption>
+        </figure>
+      </div>
+      <ul class="rules" style="margin-top:16px">
+        <li><strong>Connectivity down a single line is an ordering constraint, not a count.</strong> It converts to implications: if the third cell is innocent, every cell past it is innocent too. Collide that with any count clue on the same cells.</li>
+        <li><strong>Elbows are "at least one," never "exactly one."</strong> Keep them out of Bank 1.</li>
+        <li>A <em>not connected</em> clue is an instruction to hunt for the separating wall. At 4 cells wide, walls are cheap.</li>
+        <li><strong>Distance sets a floor on headcount.</strong> Connecting two cells takes at least <span class="co">|Δrow| + |Δcol| + 1</span> cells of that status.</li>
+      </ul>
+    </section>
+
+    <section class="p s4">
+      <h2>Connector cost</h2>
+      <p class="sub">Minimum criminals to link two cells</p>
+      <div class="calc">
+        <div class="calcgrid" id="calcGrid">
+          <button type="button" class="cbtn" data-id="A1" aria-pressed="true">A1</button>
+          <button type="button" class="cbtn" data-id="B1" aria-pressed="false">B1</button>
+          <button type="button" class="cbtn" data-id="C1" aria-pressed="false">C1</button>
+          <button type="button" class="cbtn" data-id="D1" aria-pressed="false">D1</button>
+          <button type="button" class="cbtn" data-id="A2" aria-pressed="false">A2</button>
+          <button type="button" class="cbtn" data-id="B2" aria-pressed="false">B2</button>
+          <button type="button" class="cbtn" data-id="C2" aria-pressed="false">C2</button>
+          <button type="button" class="cbtn" data-id="D2" aria-pressed="false">D2</button>
+          <button type="button" class="cbtn" data-id="A3" aria-pressed="false">A3</button>
+          <button type="button" class="cbtn" data-id="B3" aria-pressed="false">B3</button>
+          <button type="button" class="cbtn" data-id="C3" aria-pressed="false">C3</button>
+          <button type="button" class="cbtn" data-id="D3" aria-pressed="false">D3</button>
+          <button type="button" class="cbtn" data-id="A4" aria-pressed="false">A4</button>
+          <button type="button" class="cbtn" data-id="B4" aria-pressed="false">B4</button>
+          <button type="button" class="cbtn" data-id="C4" aria-pressed="false">C4</button>
+          <button type="button" class="cbtn" data-id="D4" aria-pressed="false">D4</button>
+          <button type="button" class="cbtn" data-id="A5" aria-pressed="false">A5</button>
+          <button type="button" class="cbtn" data-id="B5" aria-pressed="false">B5</button>
+          <button type="button" class="cbtn" data-id="C5" aria-pressed="false">C5</button>
+          <button type="button" class="cbtn" data-id="D5" aria-pressed="true">D5</button>
+        </div>
+        <div class="readout" id="readout">
+          <b>A1 → D5</b><br>7 orthogonal steps<br>
+          <span class="big">≥ 8</span> criminals needed
+        </div>
+      </div>
+      <p style="margin-top:12px;font-size:.9rem">Pick any two cells. If the board's criminal count can't cover the floor, the connection is impossible — a contradiction you can bank.</p>
+    </section>
+
+    <div class="part">The tagging system</div>
+
+    <section class="p s7">
+      <h2>Three banks</h2>
+      <p class="sub">Tags record relations, not reminders</p>
+      <p>The board records placements. Tags exist to record structure you've derived but can't place yet. Treat the palette as a scarce register with assigned roles — never let two meanings share a color at once.</p>
+      <div class="banks">
+        <div class="bank">
+          <div class="chips"><span class="chip a"></span><span class="chip b"></span></div>
+          <div>
+            <div class="role">Bank 1 · standing</div>
+            <h3>The chain</h3>
+            <p>Cells joined by <em>same</em>- and <em>differ</em>-links. However many cells it holds, a chain always has exactly <strong>two banks — so exactly two colors.</strong> Either color 1 is the criminal set and color 2 the innocent set, or the reverse.</p>
+          </div>
+        </div>
+        <div class="bank">
+          <div class="chips"><span class="chip c"></span></div>
+          <div>
+            <div class="role">Bank 2 · transient</div>
+            <h3>Group colors</h3>
+            <p>One color marks one exclusivity group with a known count. The value is seeing groups <em>overlap</em> — containment, arithmetic remainder, and overlap squeeze are invisible in prose and obvious in color. Retire the color the instant the group resolves.</p>
+          </div>
+        </div>
+        <div class="bank">
+          <div class="chips"><span class="chip d"></span></div>
+          <div>
+            <div class="role">Bank 3 · scratch</div>
+            <h3>Hypotheses only</h3>
+            <p>One color, always the same one, wiped completely before you resume. A speculative mark that survives into your standing banks quietly poisons every later deduction — and you won't be able to find where.</p>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top:14px;font-size:.9rem;color:var(--ink-3)"><strong style="color:var(--ink)">Palette reality:</strong> the corner tap cycles only three colors before wrapping to none. More need a long-press, and the card's second corner is a separate slot. Budget accordingly.</p>
+    </section>
+
+    <section class="p p--alt s5">
+      <h2>What makes a link</h2>
+      <p class="sub">Only these enter Bank 1</p>
+      <div class="scroll">
+        <table class="t">
+          <thead><tr><th>Constraint</th><th>Condition</th><th>Link</th></tr></thead>
+          <tbody>
+            <tr><td class="k">count / neighbor</td><td>exactly 1 among 2 unresolved</td><td><span class="go">differ</span> — opposite colors</td></tr>
+            <tr><td class="k">parity, odd</td><td>remainder is 2 cells</td><td><span class="go">differ</span> — opposite colors</td></tr>
+            <tr><td class="k">parity, even</td><td>remainder is 2 cells</td><td><span class="go">same</span> — same color</td></tr>
+            <tr><td class="k">overlap squeeze</td><td>two equal-count groups sharing all but one cell each</td><td><span class="go">same</span> — the two odd cells match</td></tr>
+            <tr><td class="k">at least one</td><td>elbows, "any" clues</td><td><span class="no">no link</span> — keep out of Bank 1</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:14px"><strong>Same-links are the half people miss.</strong> Two cells forced to share a status take the <em>same</em> color and extend the chain exactly as well as a differ-link does.</p>
+    </section>
+
+    <section class="p s7">
+      <h2>Comparative clues</h2>
+      <p class="sub">"Equal number of…" · "more … than …"</p>
+      <p>These are neither counts nor links — they constrain a <strong>difference between two neighborhoods</strong>, and they don't get a color. Three ways to get purchase:</p>
+      <ol class="steps">
+        <li><strong>Cancel the overlap.</strong> Shared neighbors contribute equally to both sides and drop out. If each exclusive side shrinks to one cell, "equal" becomes a same-link.</li>
+        <li><strong>Compute one side exactly, feed a pair into the other.</strong> The workhorse. A neighborhood containing a differ-pair has a <em>fixed</em> count contribution from it, so the clue collapses to one unknown.</li>
+        <li><strong>Chain the equalities.</strong> Equality is transitive: several "equal" clues fuse into one equivalence class of counts. Pin any member and you pin all of them.</li>
+      </ol>
+      <p style="margin-top:12px">Bound the small side too — a comparative against a corner (3 neighbors) is far tighter than one against an interior cell (8).</p>
+    </section>
+
+    <section class="p p--alt s5">
+      <h2>Branch-independent contribution</h2>
+      <p class="sub">The single highest-yield move in the game</p>
+      <p>A differ-pair contributes <strong>exactly one criminal and exactly one innocent, in both worlds.</strong> A same-pair contributes <strong>zero or two — always even.</strong> Neither needs resolving to be used.</p>
+      <p>So whenever a pair sits inside a clue's set, subtract its guaranteed contribution and read what's left:</p>
+      <ul class="rules">
+        <li><strong>Parity clues</strong> — a differ-pair flips the required parity of the remainder; a same-pair leaves it untouched.</li>
+        <li><strong>Comparative clues</strong> — a pair fixes one side's count outright, leaving a single unknown.</li>
+        <li><strong>Exact counts</strong> — a pair consumes exactly one of the quota.</li>
+      </ul>
+      <p style="margin-top:14px"><strong>The value of a pair is what it does while unresolved</strong>, not what happens when it collapses. Don't wait to break a chain — spend it.</p>
+    </section>
+
+    <section class="p s7">
+      <h2>Before you spend a color</h2>
+      <p class="sub">Translate · prune · quota</p>
+      <ol class="flow">
+        <li>
+          <span class="n">01</span>
+          <div>
+            <h3>Translate the property into cells</h3>
+            <p>"Exactly one <em>X</em> has a criminal directly above them" names a category, but the constrained cells are elsewhere. Rewrite it as <strong>"exactly one criminal among {the cell directly above each X}"</strong>. Tag those cells — never the category members.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">02</span>
+          <div>
+            <h3>Prune undefined members</h3>
+            <p>Drop anyone for whom the relation doesn't exist — nobody in row 1 has a cell above them, nobody in row 5 has one below. Phantom members mis-size the group and corrupt the count.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">03</span>
+          <div>
+            <h3>Check the quota</h3>
+            <p>Split into resolved and unresolved, and count what the resolved part already supplies. Only one of the three outcomes below needs a color.</p>
+          </div>
+        </li>
+      </ol>
+      <div class="scroll" style="margin-top:14px">
+        <table class="t">
+          <thead><tr><th>Quota status</th><th>What it means</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td class="k">already filled</td><td>every remaining member is innocent</td><td><span class="go">place — don't tag</span></td></tr>
+            <tr><td class="k">count == cells left</td><td>every remaining cell is criminal</td><td><span class="go">place — don't tag</span></td></tr>
+            <tr><td class="k">anything between</td><td>a live group</td><td>tag it — Bank 2</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:12px"><strong>A satisfied group isn't something to track — it's a batch of placements waiting to be collected.</strong></p>
+    </section>
+
+    <section class="p p--alt s5">
+      <h2>When a chain pays</h2>
+      <p class="sub">Check these after every placement</p>
+      <ul class="rules">
+        <li><strong>Resolve one, resolve all.</strong> Prove any single tagged cell and the whole chain collapses in one pass.</li>
+        <li><strong>A bank that can't supply the count → contradiction.</strong> If a clue needs one criminal from a set holding two same-colored cells, that world is dead and the other color is the criminal bank.</li>
+        <li><strong>Count collision.</strong> A line known to hold zero criminals containing a color-1 cell makes color 1 the innocent bank everywhere.</li>
+        <li><strong>Forced to differ, same color</strong> (or forced to match, opposite colors) → that world is impossible. No case analysis required.</li>
+      </ul>
+      <p style="margin-top:14px">Untagged, being stuck means re-deriving the board. Tagged, it means <strong>looking at the colored cells first</strong>.</p>
+    </section>
+
+    <section class="p">
+      <h2>Tag hygiene</h2>
+      <p class="sub">Where clean solves are won and lost</p>
+      <div class="figrow" style="gap:26px">
+        <div style="flex:1 1 300px;min-width:260px">
+          <ul class="rules warn">
+            <li><strong>Colors count banks, not cells.</strong> Three colors on three chained cells throws away the thing the chain encodes. Merge them to two.</li>
+            <li><strong>Don't tag what a line already shows.</strong> A count over a whole row or column needs no color. Colors are for scattered constraints.</li>
+            <li><strong>Don't tag a link that pays immediately.</strong> If a same-link resolves in the same breath that created it, it never needed a color.</li>
+            <li><strong>A cell in two structures takes its Bank 1 color</strong>, with the group membership noted in the margin.</li>
+            <li><strong>Write down what each color means as you assign it.</strong> An unlabeled color is worse than none.</li>
+          </ul>
+        </div>
+        <div style="flex:1 1 300px;min-width:260px">
+          <p style="margin-bottom:12px"><strong>The life cycle.</strong> Groups shrink into pairs; pairs fuse into a chain; the chain collapses on a single placement. Retire a color at every step — a stale tag is the main source of late-puzzle confusion.</p>
+          <p style="margin-bottom:8px"><strong>Run this scan after every placement:</strong></p>
+          <ol class="steps">
+            <li>Did it shrink a parity remainder to two cells? → new Bank 1 link.</li>
+            <li>Did it remove a member from a Bank 2 group? → recheck the quota; the group may now be a pair, or fully satisfied.</li>
+            <li>Did it resolve a chain cell? → the chain collapses; clear both colors.</li>
+            <li>Is any color still sitting on a resolved cell? → clear it now.</li>
+          </ol>
+          <p style="margin-top:12px;font-size:.9rem">Step 4 is the one people skip.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="part">Procedure</div>
+
+    <section class="p s6">
+      <h2>Counting, done fully</h2>
+      <p class="sub">Complement counting closes more Evil boards than cleverness</p>
+      <p>Track <strong>both</strong> criminals and innocents for all nine lines. If a column holds exactly 3 criminals it also holds exactly 2 innocents — and the second fact fires first surprisingly often.</p>
+      <ul class="rules">
+        <li>Keep a running <span class="co">placed / capacity</span> tally per line. Rows cap at 4, columns at 5.</li>
+        <li>A row needing 2 criminals with an "exactly 1" group covering 3 of its 4 cells forces the fourth cell outright.</li>
+        <li>Any group fully contained in another group of the same count makes every cell outside the inner one innocent.</li>
+        <li><strong>Watch for branch-independent facts.</strong> If a line's only unresolved cells are two chain cells of opposite colors, that line's count is fixed in both worlds — bank it now.</li>
+      </ul>
+    </section>
+
+    <section class="p s6">
+      <h2>Case analysis</h2>
+      <p class="sub">For when the board genuinely stalls</p>
+      <p>Assume a cell is criminal, propagate hard, hunt for a contradiction. Find one and that cell is <strong>provably innocent</strong> — a deduction, not a guess.</p>
+      <ol class="steps">
+        <li>Choose the branch point by <em>consequences</em>: the cell in the most clues, or on the tightest count line.</li>
+        <li>Assume <strong>criminal</strong> rather than innocent — most clues count criminals, so it propagates harder.</li>
+        <li>Mark everything in the scratch color only.</li>
+        <li>Test the connector-cost floor first. Count contradictions surface faster than adjacency ones.</li>
+        <li>Contradiction → place the opposite and clear scratch. No contradiction → clear scratch, pick a different branch point.</li>
+      </ol>
+    </section>
+
+    <section class="p">
+      <h2>Stuck? Run this order</h2>
+      <p class="sub">Breadth beats depth — the crack is rarely where you're staring</p>
+      <ol class="steps">
+        <li><strong>Re-read the clue you last dimmed.</strong> Clues never expire; new placements give old clues new teeth.</li>
+        <li><strong>Scan tagged cells.</strong> Cheapest possible cascade, and the reason tags exist.</li>
+        <li><strong>Subtract every pair's guaranteed contribution</strong> from every live clue that contains one. This is where most stalls break.</li>
+        <li><strong>Re-run the quota check on every live group.</strong> Satisfied groups turn into free placements and you won't notice unless you look.</li>
+        <li><strong>Sweep every line's complement count.</strong> Look for lines where the innocents, not the criminals, are nearly full.</li>
+        <li><strong>Re-check each vocabulary term you relied on.</strong> Neighbors vs connected, <em>directly</em> above vs above, edges including corners, "all" vs "any".</li>
+        <li><strong>Look at the corners.</strong> Three neighbors and two exits — they resolve under pressure that leaves the interior untouched.</li>
+        <li><strong>Only now, case analysis.</strong></li>
+      </ol>
+      <p style="margin-top:14px">One standing caution: unsupported taps are blocked rather than penalized, so it's possible to probe the solver for answers. It works, and it substitutes its reasoning for yours — a blocked tap is best read as a signal you jumped ahead, not as a free query.</p>
+    </section>
+
+    <div class="part">Worked example · Sep 9 2026 · Tricky</div>
+
+    <section class="p">
+      <h2>A complete solve, tag by tag</h2>
+      <p class="sub">20 of 20 · no hints · no blocked taps</p>
+      <div class="ex-lead">
+        <div style="flex:1 1 340px;min-width:280px">
+          <p>Every placement below was accepted by the game on the first attempt. Since the solver refuses any move that isn't logically forced, that acceptance is an independent check on each step of the reasoning.</p>
+          <p>Watch what the two chains actually do: <strong>neither is resolved until very late, and between them they produce seven placements while still unknown.</strong> That is the whole argument for the system.</p>
+        </div>
+        <div class="roster">
+          <b>A1</b> Adam doc &nbsp; <b>B1</b> Barb jdg &nbsp; <b>C1</b> Chad cook &nbsp; <b>D1</b> Evie cook<br>
+          <b>A2</b> Frank doc &nbsp; <b>B2</b> Gus tch &nbsp; <b>C2</b> Henry bld &nbsp; <b>D2</b> Isaac sl<br>
+          <b>A3</b> Jane tch &nbsp; <b>B3</b> Keith frm &nbsp; <b>C3</b> Laura frm &nbsp; <b>D3</b> Maria sng<br>
+          <b>A4</b> Nancy sl &nbsp; <b>B4</b> Oscar sng &nbsp; <b>C4</b> Phil cdr &nbsp; <b>D4</b> Ruby cdr<br>
+          <b>A5</b> Sue jdg &nbsp; <b>B5</b> Terry sng &nbsp; <b>C5</b> Vicky cdr &nbsp; <b>D5</b> Wanda bld
+        </div>
+      </div>
+      <div class="legend">
+        <span><i class="sw i"></i> innocent</span>
+        <span><i class="sw c"></i> criminal</span>
+        <span><i class="sw u"></i> unknown</span>
+        <span><i class="sw g1"></i> tag 1</span>
+        <span><i class="sw g2"></i> tag 2</span>
+        <span><i class="sw g3"></i> tag 3</span>
+      </div>
+    </section>
+
+    <section class="p p--alt">
+      <div id="steps"></div>
+    </section>
+
+    <section class="p">
+      <h2>What this board taught</h2>
+      <p class="sub">Three things worth carrying forward</p>
+      <ul class="rules">
+        <li><strong>Seven placements came from pairs nobody resolved.</strong> Phil, Barb, Nancy, Isaac, Maria, Evie, and the Chad/Henry pair itself all fell out of a differ-pair's guaranteed contribution. Chain X wasn't broken until step 13, by which point it had already paid four times.</li>
+        <li><strong>Every comparative fell to the same move.</strong> Compute one neighborhood exactly, feed a pair's fixed contribution into the other, solve for the single unknown. Six clues, one technique.</li>
+        <li><strong>Connectivity down a column behaved as an ordering constraint.</strong> "All criminals below Barb are connected" never placed anyone by itself — it converted to "Keith innocent ⇒ Oscar innocent," and colliding that implication with a count-1 group is what produced the third placement.</li>
+      </ul>
+      <p style="margin-top:14px">Colors used at peak: <strong>three</strong> — which is exactly what the corner tap offers before it wraps. The ranking discipline isn't theoretical; the UI enforces it.</p>
+    </section>
+
+  </div>
+
+  <div class="foot">Rules per the official tutorial and in-game glossary · worked example solved live on Sep 9 2026</div>
+</div>
+
+<script>
+(function(){
+  var grid=document.getElementById('calcGrid');
+  var out=document.getElementById('readout');
+  var picks=['A1','D5'];
+  function xy(id){return {c:id.charCodeAt(0)-65, r:parseInt(id.slice(1),10)-1};}
+  function render(){
+    var btns=grid.querySelectorAll('.cbtn');
+    for(var i=0;i<btns.length;i++){
+      btns[i].setAttribute('aria-pressed', picks.indexOf(btns[i].dataset.id)>-1?'true':'false');
+    }
+    if(picks.length<2){ out.innerHTML='<b>'+(picks[0]||'—')+' → …</b><br>pick a second cell'; return; }
+    var a=xy(picks[0]), b=xy(picks[1]);
+    var d=Math.abs(a.r-b.r)+Math.abs(a.c-b.c);
+    out.innerHTML='<b>'+picks[0]+' → '+picks[1]+'</b><br>'+d+' orthogonal step'+(d===1?'':'s')+'<br>'+
+      '<span class="big">≥ '+(d+1)+'</span> criminals needed';
+  }
+  grid.addEventListener('click',function(e){
+    var b=e.target.closest('.cbtn'); if(!b)return;
+    var id=b.dataset.id, at=picks.indexOf(id);
+    if(at>-1){picks.splice(at,1);} else {picks.push(id); if(picks.length>2)picks.shift();}
+    render();
+  });
+  render();
+})();
+
+(function(){
+  var COORDS=[];
+  [1,2,3,4,5].forEach(function(r){ ['A','B','C','D'].forEach(function(c){ COORDS.push(c+r); }); });
+
+  var STEPS=[
+    {t:'Opening', who:'Adam · A1',
+     q:'Henry and Keith have no innocent neighbors in common',
+     b:'I...................', g:{},
+     p:['One card face-up, one clue, no tags yet. Read it and look for what it resolves outright.']},
+
+    {t:'Two placements, no color', who:'from Adam',
+     q:null, b:'I....C....C.........', g:{},
+     p:['Henry (C2) and Keith (B3) share exactly two neighbors — <b>Gus</b> and <b>Laura</b> — since the glossary excludes the two referenced people themselves. No innocents in that intersection means both are criminal.',
+        'A clue that resolves outright never earns a tag.']},
+
+    {t:'Two clues collide', who:'Gus + Laura',
+     q:'Jane has only one innocent neighbor &nbsp;·&nbsp; All criminals below Barb are connected',
+     b:'I....C...CC.........', g:{},
+     p:['Gus leaves <b>exactly 1 innocent among Frank, Keith, Nancy, Oscar</b>. Laura, read down column B, means the criminals there form a contiguous run from Gus.',
+        'Keith innocent would end the run, forcing Oscar innocent too — two innocents where one is allowed. So <b>Keith is criminal</b>.']},
+
+    {t:'One clue, two constraints', who:'Keith · B3',
+     q:'Only 1 of the 2 innocents neighboring Nancy is in row 3',
+     b:'I....C..ICC.........', g:{},
+     p:['The positional qualifier splits Nancy\'s neighbors. Row 3 holds Jane and Keith — Keith just went criminal, so <b>Jane is innocent</b>.',
+        'The other half leaves <b>exactly 1 innocent among Oscar, Sue, Terry</b>.']},
+
+    {t:'A free placement', who:'Jane · A3',
+     q:'Vicky is one of 2 innocents in row 5',
+     b:'I....C..ICC.......I.', g:{},
+     p:['<b>Vicky is innocent</b> outright, and row 5 has exactly 2 innocents — so <b>exactly 1 innocent among Sue, Terry, Wanda</b>.']},
+
+    {t:'A same-link that never needs a color', who:'squeeze',
+     q:null, b:'I....C..ICC..C....IC', g:{},
+     p:['Two groups — {Oscar, Sue, Terry} and {Sue, Terry, Wanda} — share Sue and Terry, which cancel. So <b>Oscar and Wanda match</b>.',
+        'Laura\'s prefix rule says Oscar innocent would force Terry innocent: two innocents in a group allowing one. So <b>Oscar is criminal</b>, and Wanda with him.',
+        'The same-link existed for a single step and paid immediately — no tag required.']},
+
+    {t:'First tags', who:'Wanda · D5',
+     q:'Exactly 1 of the 3 singers has a criminal directly below them',
+     b:'I....C..ICC..C....IC', g:{B5:1,A5:2,D4:2},
+     p:['Translate: the singers are Maria, Oscar, Terry → the cells below them are Ruby, Terry, and <b>nothing below Terry</b>, who sits in row 5. Prune him. That leaves <b>exactly 1 criminal among Ruby and Terry</b>.',
+        'Keith\'s leftover group is now <b>exactly 1 innocent among Sue and Terry</b>. Both are differ-pairs, and they share Terry — so <b>Sue and Ruby match</b>.'],
+     tag:'Terry → tag 1. Sue and Ruby → tag 2. One chain, two banks, two colors.'},
+
+    {t:'Phil, from a pair nobody resolved', who:'Vicky · C5',
+     q:'There\'s an odd number of criminals neighboring me',
+     b:'I....C..ICC..CI...IC', g:{B5:1,A5:2,D4:2},
+     p:['Oscar and Wanda are criminal — 2, even. Ruby and Terry are a differ-pair, so they supply <b>exactly 1 criminal whichever way they fall</b>.',
+        '3 + Phil must be odd → <b>Phil is innocent</b>. The chain paid without being touched.']},
+
+    {t:'Barb, same lever', who:'Phil · C4',
+     q:'Vicky has more criminal neighbors than Frank',
+     b:'II...C..ICC..CI...IC', g:{B5:1,A5:2,D4:2},
+     p:['Vicky\'s criminal-neighbor count is pinned at <b>3</b> by that same pair. Frank\'s is Adam (I), Jane (I), Gus (C), Keith (C), plus Barb — so 2 + Barb.',
+        'Strictly greater forces <b>Barb innocent</b>. First comparative, cracked by feeding a pair into one side.']},
+
+    {t:'Nancy and Frank', who:'Barb · B1',
+     q:'There\'s an odd number of innocents neighboring Oscar',
+     b:'IIC..C..ICC..CI...IC'.replace('C','.'), g:{B5:1,A5:2,D4:2,A2:3},
+     p:['Oscar\'s known innocent neighbors are Jane, Phil, Vicky — 3. Sue and Terry supply <b>exactly 1 innocent</b> either way.',
+        '4 + Nancy must be odd → <b>Nancy is innocent</b>. Gus\'s group has shrunk to Frank/Nancy, so <b>Frank is criminal</b>.'],
+     tag:'Frank/Nancy briefly took tag 3 — and resolved on the same move. Clear it immediately.'},
+
+    {t:'Isaac, and a fresh pair', who:'Nancy + Frank',
+     q:'Barb and I have an equal number of innocent neighbors &nbsp;·&nbsp; Evie and Adam have an equal number of criminal neighbors',
+     b:'II.ICC.CICC..CI...IC', g:{B5:1,A5:2,D4:2,C1:3},
+     p:['Nancy\'s own count is pinned at <b>2</b> — Jane (I), Keith (C), Oscar (C), plus Sue/Terry\'s guaranteed 1. Barb\'s side is 1 + Chad + Henry = 2, so <b>exactly one of Chad and Henry is innocent</b>. A new pair.',
+        'Adam has <b>2</b> criminal neighbors. Evie\'s are Chad, Henry, Isaac — and the new pair supplies exactly 1. So <b>Isaac is criminal</b>.'],
+     tag:'Chad → tag 3, reused the moment Frank/Nancy freed it. Henry is noted in the margin as its opposite — the palette has no fourth color.'},
+
+    {t:'Maria', who:'Isaac · D2',
+     q:'Barb and Phil have an equal number of innocent neighbors',
+     b:'II.ICC.CICCC.CI...IC', g:{B5:1,A5:2,D4:2,C1:3},
+     p:['Barb\'s count is 2. Phil\'s is Vicky (I) plus Maria plus the Ruby/Terry pair\'s guaranteed 1 → 2 + Maria.',
+        'Equal → <b>Maria is criminal</b>.']},
+
+    {t:'Evie', who:'Maria · D3',
+     q:'Isaac and Nancy have an equal number of innocent neighbors',
+     b:'II.ICC.CICCC.CI...IC'.replace(/^(..)./,'$1I'), g:{B5:1,A5:2,D4:2,C1:3},
+     p:['Nancy is 2. Isaac\'s side is Evie plus the Chad/Henry pair\'s guaranteed 1 innocent → 1 + Evie.',
+        'Equal → <b>Evie is innocent</b>. Third comparative, third time the same move.']},
+
+    {t:'The chain collapses', who:'Oscar · B4',
+     q:'Ruby has more innocent neighbors than Sue',
+     b:'II.ICC.CICCCICIIICIC'.replace(/^(..)./,'$1.'), g:{C1:3},
+     p:['Ruby\'s neighborhood is finally all known — Phil and Vicky innocent, so <b>2</b>. Sue\'s is Nancy (I), Oscar (C), Terry → 1 + Terry.',
+        '2 > 1 + Terry forces <b>Terry criminal</b> — and tags 1 and 2 resolve together: <b>Sue and Ruby innocent</b>.'],
+     tag:'Clear tags 1 and 2. Chain X is spent, having produced four placements before anyone knew which bank was which.'},
+
+    {t:'Home', who:'Ruby · D4',
+     q:'Exactly 1 cook has an innocent directly below them',
+     b:'IICICCICICCCICIIICIC', g:{},
+     p:['The cooks are Chad and Evie; below them sit Henry and Isaac. Isaac is criminal, so <b>Henry is innocent</b> — and the last pair gives <b>Chad criminal</b>.',
+        'Board complete. Clear tag 3.'],
+     tag:'Final hygiene: every color off the board.'}
+  ];
+
+  // explicit board strings (row-major A1..D5) to avoid any ambiguity
+  var BOARDS=[
+    'I...................',
+    'I....C....C.........',
+    'I....C...CC.........',
+    'I....C..ICC.........',
+    'I....C..ICC.......I.',
+    'I....C..ICC..C....IC',
+    'I....C..ICC..C....IC',
+    'I....C..ICC..CI...IC',
+    'II...C..ICC..CI...IC',
+    'II..CC..ICC.ICI...IC',
+    'II..CC.CICC.ICI...IC',
+    'II..CC.CICCCICI...IC',
+    'II.ICC.CICCCICI...IC',
+    'II.ICC.CICCCICIIICIC',
+    'IICICCICICCCICIIICIC'
+  ];
+
+  var host=document.getElementById('steps');
+  STEPS.forEach(function(s,i){
+    var board=BOARDS[i];
+    var wrap=document.createElement('div');
+    wrap.className='step';
+
+    var bd=document.createElement('div');
+    bd.className='sb';
+    bd.setAttribute('role','img');
+    bd.setAttribute('aria-label','Board state at step '+i);
+    for(var k=0;k<20;k++){
+      var ch=board[k], co=COORDS[k];
+      var cell=document.createElement('span');
+      cell.className='sc'+(ch==='I'?' i':ch==='C'?' c':'');
+      cell.textContent = ch==='.' ? '' : ch;
+      if(s.g && s.g[co]){
+        var tg=document.createElement('i');
+        tg.className='tg g'+s.g[co];
+        cell.appendChild(tg);
+      }
+      bd.appendChild(cell);
+    }
+
+    var body=document.createElement('div');
+    body.className='body';
+    var html='<p class="eyebrow">Step '+i+' · '+s.who+'</p><h3>'+s.t+'</h3>';
+    if(s.q) html+='<p class="quote">“'+s.q+'”</p>';
+    s.p.forEach(function(par){ html+='<p>'+par+'</p>'; });
+    if(s.tag) html+='<div class="tagnote">'+s.tag+'</div>';
+    body.innerHTML=html;
+
+    wrap.appendChild(bd);
+    wrap.appendChild(body);
+    host.appendChild(wrap);
+  });
+})();
+</script>
