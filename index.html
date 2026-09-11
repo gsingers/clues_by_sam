@@ -120,6 +120,14 @@ figcaption b{color:var(--ink-2);font-weight:600}
 .p a{color:var(--inno);text-decoration:none;border-bottom:1px solid var(--rule-2)}
 .p a:hover{color:var(--ink);border-bottom-color:var(--ink)}
 
+.gl{position:relative;border-bottom:1px dotted var(--rule-2);cursor:help}
+.gl::after{content:attr(data-tip);position:absolute;left:0;bottom:calc(100% + 7px);z-index:20;width:max-content;max-width:270px;background:var(--ink);color:var(--ground);font-family:var(--f-body);font-size:12px;font-weight:400;font-style:normal;line-height:1.4;letter-spacing:0;text-transform:none;white-space:normal;text-align:left;padding:7px 9px;border-radius:2px;opacity:0;visibility:hidden;transition:opacity .12s ease;pointer-events:none}
+.gl:hover::after,.gl:focus::after{opacity:1;visibility:visible}
+.gl:focus-visible{outline:2px solid var(--inno);outline-offset:2px}
+.t .gl::after{bottom:auto;top:calc(100% + 7px)}
+.gl--up::after{top:auto;bottom:calc(100% + 7px)}
+@media(max-width:600px){.gl::after{max-width:210px}}
+
 .ex{font-family:var(--f-mono);font-size:10.5px;line-height:1.6;color:var(--ink-2);background:var(--panel-2);border-left:2px solid var(--rule-2);padding:7px 10px;margin-top:9px}
 .p--alt .ex{background:var(--panel)}
 .ex b{color:var(--ink);font-weight:600}
@@ -356,6 +364,10 @@ section[id],div[id]{scroll-margin-top:14px}
         <div class="term"><dt>in between</dt><dd>Strictly between — excludes the two named people.</dd></div>
         <div class="term"><dt>all X are Y</dt><dd>Carries existential import — also asserts <strong>at least one X exists</strong>.</dd></div>
         <div class="term"><dt>both</dt><dd>Exactly 2. <span class="co">any</span> is conditional and promises no existence.</dd></div>
+        <div class="term">
+          <dt>odd / even</dt>
+          <dd>A <strong>parity</strong> clue — "an odd number of the cooks are criminals" — fixes only whether a count is odd or even, never the count itself. Its use comes later: once every member but two is resolved, the parity still required of those two forces them to <em>differ</em> (odd) or to <em>match</em> (even).</dd>
+        </div>
         <div class="term"><dt>common neighbors</dt><dd>Neighbors of both — excludes the two referenced people themselves.</dd></div>
         <div class="term"><dt>share</dt><dd>"Have in common." <span class="co">in total</span> means the sum across the named groups.</dd></div>
         <div class="term">
@@ -476,7 +488,7 @@ section[id],div[id]{scroll-margin-top:14px}
         <li><strong>Connectivity along a single line is an ordering constraint, not a count.</strong> It converts to implications: if the third cell is innocent, every cell past it is innocent. Combine that with any count clue covering the same cells.</li>
         <li><strong>Elbow constraints are "at least one", not "exactly one".</strong> Knowing that at least one of two cells is criminal fixes no relation between them, so the pair cannot later be recorded as a <a href="#links">link</a>.</li>
         <li>A <em>not connected</em> clue asserts that a separating line of innocents exists. The board is 4 cells wide, so such walls are short.</li>
-        <li><strong>Distance sets a lower bound on headcount.</strong> Connecting two cells requires at least <span class="co">|Δrow| + |Δcol| + 1</span> cells of that status.</li>
+        <li><strong>Distance sets a lower bound on headcount.</strong> Connecting two cells requires at least <span class="co gl" tabindex="0" data-tip="Manhattan distance plus one: rows apart, plus columns apart, plus the cell you start from.">|Δrow| + |Δcol| + 1</span> cells of that status.</li>
       </ul>
     </section>
 
@@ -682,14 +694,14 @@ section[id],div[id]{scroll-margin-top:14px}
       <p class="sub">Symbols for cells, sets, and counts</p>
       <p>The app records placements and tags record relations on the board. Quantifiers, implications, running counts, and discharged branches fit in neither, so they belong on paper. The notation below is chosen to be quick to write by hand.</p>
       <dl class="terms">
-        <div class="term"><dt>V · C · I</dt><dd>The 20 cells and the two sets that partition them: <span class="sym">C ⊎ I = V</span>. A status is written <span class="sym">B3 ∈ C</span>.</dd></div>
+        <div class="term"><dt>V · C · I</dt><dd>The 20 cells and the two sets that partition them: <span class="sym gl" tabindex="0" data-tip="Disjoint union: every cell is in exactly one of C and I, and together they are the whole board.">C ⊎ I = V</span>. A status is written <span class="sym gl" tabindex="0" data-tip="Set membership: B3 is an element of the criminal set.">B3 ∈ C</span>.</dd></div>
         <div class="term"><dt>c(S)</dt><dd>Criminals in the set <em>S</em>. Most clues are assertions about <span class="sym">c</span> of some set, and identifying <em>which set</em> is usually the harder half of the clue.</dd></div>
-        <div class="term"><dt>i(S)</dt><dd><span class="sym">|S| − c(S)</span>. Recording both values makes complement counting mechanical.</dd></div>
+        <div class="term"><dt>i(S)</dt><dd><span class="sym gl" tabindex="0" data-tip="|S| is the size of S, the number of cells it contains. Subtract the criminals and the innocents remain.">|S| − c(S)</span>. Recording both values makes complement counting mechanical.</dd></div>
         <div class="term"><dt>N(x) · N₄(x)</dt><dd>The 8-neighborhood, and the orthogonal one. <span class="sym">G₄</span> is the graph the word <em>connected</em> lives in.</dd></div>
         <div class="term"><dt>x↑ x↓ x← x→</dt><dd>The one cell <strong>directly</strong> adjacent in that direction. Undefined at the border: <span class="sym">A1↑</span> does not exist, which is not the same as being innocent.</dd></div>
         <div class="term">
           <dt>↑x ↓x ←x →x</dt>
-          <dd>The whole line beyond <em>x</em>. <span class="sym">↓B1 = {B2,B3,B4,B5}</span>.</dd>
+          <dd>The whole line beyond <em>x</em>. <span class="sym gl" tabindex="0" data-tip="Braces list the members of a set. Here: every cell below B1 in column B.">↓B1 = {B2,B3,B4,B5}</span>.</dd>
           <div class="trap">The side the arrow sits on distinguishes an adjacency clue from a whole-line clue. Fixing it during transcription prevents the misreading from reaching the deduction.</div>
         </div>
         <div class="term"><dt>R1…R5 · A…D</dt><dd>The nine lines, for the count ledger. Rows cap at 4, columns at 5.</dd></div>
@@ -702,12 +714,12 @@ section[id],div[id]{scroll-margin-top:14px}
       <p class="sub">Recording Bank 1 links</p>
       <p>A tag color is a 2-coloring of a graph whose edges are the two link types:</p>
       <ul class="rules">
-        <li><span class="sym">x ⊕ y</span> — a differ-link. Exactly one of them is criminal: <span class="sym">c({x,y}) = 1</span>, in both worlds.</li>
-        <li><span class="sym">x ≡ y</span> — a same-link. <span class="sym">c({x,y}) ≡ 0 (mod 2)</span>.</li>
+        <li><span class="sym gl" tabindex="0" data-tip="Exclusive or: exactly one of x and y is a criminal, never both and never neither.">x ⊕ y</span> — a differ-link. Exactly one of them is criminal: <span class="sym gl" tabindex="0" data-tip="The pair contributes exactly one criminal to any set containing it, whichever way it later resolves.">c({x,y}) = 1</span>, in both worlds.</li>
+        <li><span class="sym gl" tabindex="0" data-tip="Equivalence: x and y always have the same status, both criminal or both innocent.">x ≡ y</span> — a same-link. <span class="sym gl" tabindex="0" data-tip="Congruent to 0 modulo 2, that is, even: the pair contributes either 0 or 2 criminals.">c({x,y}) ≡ 0 (mod 2)</span>.</li>
       </ul>
       <p style="margin-top:12px">⊕ is exclusive or, so links compose: <span class="sym">x ⊕ y</span> with <span class="sym">y ⊕ z</span> gives <span class="sym">x ≡ z</span>. Count the ⊕ edges along any path between two cells — <strong>odd means they differ, even means they match.</strong></p>
       <p><strong>An odd ⊕-cycle is ⊥.</strong> The chain cannot be 2-colored, so it cannot be tagged, and the assumption that produced it is false. This is the <em>forced to differ, same color</em> test applied to the written chain.</p>
-      <p>Write the chain as two columns, <span class="sym">α | β</span>. The columns correspond to the two tag colors.</p>
+      <p>Write the chain as two columns, <span class="sym gl" tabindex="0" data-tip="The chain has two banks. One of α and β is the criminal set and the other the innocent set; which is which is not yet known.">α | β</span>. The columns correspond to the two tag colors.</p>
     </section>
 
     <section class="p" id="notation-translate">
@@ -718,22 +730,22 @@ section[id],div[id]{scroll-margin-top:14px}
         <table class="t">
           <thead><tr><th>As the game writes it</th><th>Ledger form</th><th>Notes</th></tr></thead>
           <tbody>
-            <tr><td>Exactly 2 doctors are criminals</td><td class="k">c(D) = 2</td><td>also <span class="sym">i(D) = |D| − 2</span></td></tr>
-            <tr><td>All doctors are criminals</td><td class="k">D ⊆ C &nbsp;·&nbsp; D ≠ ∅</td><td>the second line is the existential import</td></tr>
+            <tr><td>Exactly 2 doctors are criminals</td><td class="k"><span class="gl" tabindex="0" data-tip="c(S) counts the criminals in the set S. Here, exactly 2 of the doctors.">c(D) = 2</span></td><td>also <span class="sym">i(D) = |D| − 2</span></td></tr>
+            <tr><td>All doctors are criminals</td><td class="k"><span class="gl" tabindex="0" data-tip="Subset, then non-empty: every doctor is in the criminal set, and at least one doctor exists.">D ⊆ C &nbsp;·&nbsp; D ≠ ∅</span></td><td>the second line is the existential import</td></tr>
             <tr><td>Any doctor is a criminal</td><td class="k">D ⊆ C</td><td>no existence claim</td></tr>
             <tr><td>At least one of them is a criminal</td><td class="k">c(X) ≥ 1</td><td><span class="no">not a link</span>; keep out of Bank 1</td></tr>
             <tr><td>Both X and Y are criminals</td><td class="k">{X,Y} ⊆ C, |{X,Y}| = 2</td><td>exactly 2, not "at least 2"</td></tr>
             <tr><td>Barb has exactly 2 criminal neighbors</td><td class="k">c(N(B1)) = 2</td><td>the 8-graph, and B1 is not in it</td></tr>
-            <tr><td>Exactly 1 doctor has a criminal directly above them</td><td class="k">c({ x↑ : x ∈ D, x ∉ R1 }) = 1</td><td>tag the cells above, not the doctors; row 1 has none</td></tr>
-            <tr><td>Henry and Keith share no innocent neighbors</td><td class="k">(N(C2) ∩ N(B3)) ∩ I = ∅</td><td>the intersection excludes C2 and B3 themselves</td></tr>
+            <tr><td>Exactly 1 doctor has a criminal directly above them</td><td class="k"><span class="gl" tabindex="0" data-tip="Set-builder notation: the cell directly above each doctor, excluding any doctor in row 1, who has no cell above.">c({ x↑ : x ∈ D, x ∉ R1 }) = 1</span></td><td>tag the cells above, not the doctors; row 1 has none</td></tr>
+            <tr><td>Henry and Keith share no innocent neighbors</td><td class="k"><span class="gl" tabindex="0" data-tip="Intersection and empty set: no cell is both a neighbor of each of them and innocent.">(N(C2) ∩ N(B3)) ∩ I = ∅</span></td><td>the intersection excludes C2 and B3 themselves</td></tr>
             <tr><td>More farmers than singers are criminals</td><td class="k">c(F) &gt; c(S)</td><td><span class="sym">c(S) = 0</span> is still allowed</td></tr>
             <tr><td>An equal number of farmers and singers</td><td class="k">c(F) = c(S)</td><td>transitive; combine equalities into one class</td></tr>
             <tr><td>Farmers have the most criminals</td><td class="k">c(F) &gt; c(X) for every other X</td><td>strict; ties are excluded</td></tr>
-            <tr><td>An odd number of cooks are criminals</td><td class="k">c(K) ≡ 1 (mod 2)</td><td>remainder down to 2 cells → a ⊕ link</td></tr>
-            <tr><td>Exactly 1 criminal between Sue and Wanda</td><td class="k">c( (A5, D5) ) = 1</td><td>open interval; the ends are excluded</td></tr>
-            <tr><td>All criminals below Barb are connected</td><td class="k">C ∩ ↓B1 connected in G₄</td><td>an ordering constraint: <span class="sym">B3 ∈ I ⇒ B4, B5 ∈ I</span></td></tr>
-            <tr><td>Henry and Keith are not connected</td><td class="k">∃ W ⊆ I separating them in G₄</td><td>locate the wall; the board is only 4 cells wide</td></tr>
-            <tr><td>If Adam is a criminal, so is Barb</td><td class="k">A1 ∈ C ⇒ B1 ∈ C<br>B1 ∈ I ⇒ A1 ∈ I</td><td>record both lines; the contrapositive applies more often</td></tr>
+            <tr><td>An odd number of cooks are criminals</td><td class="k"><span class="gl" tabindex="0" data-tip="Congruent to 1 modulo 2, that is, odd.">c(K) ≡ 1 (mod 2)</span></td><td>remainder down to 2 cells → a ⊕ link</td></tr>
+            <tr><td>Exactly 1 criminal between Sue and Wanda</td><td class="k"><span class="gl" tabindex="0" data-tip="Round brackets mark an open interval: the cells strictly between A5 and D5, excluding both ends.">c( (A5, D5) ) = 1</span></td><td>open interval; the ends are excluded</td></tr>
+            <tr><td>All criminals below Barb are connected</td><td class="k"><span class="gl" tabindex="0" data-tip="G₄ is the orthogonal-adjacency graph, where each cell touches at most four others.">C ∩ ↓B1 connected in G₄</span></td><td>an ordering constraint: <span class="sym">B3 ∈ I ⇒ B4, B5 ∈ I</span></td></tr>
+            <tr><td>Henry and Keith are not connected</td><td class="k"><span class="gl" tabindex="0" data-tip="There exists a set W of innocent cells that lies across every orthogonal path between the two.">∃ W ⊆ I separating them in G₄</span></td><td>locate the wall; the board is only 4 cells wide</td></tr>
+            <tr><td>If Adam is a criminal, so is Barb</td><td class="k"><span class="gl gl--up" tabindex="0" data-tip="Implication: whenever the left side holds, the right side holds. The second line is its contrapositive.">A1 ∈ C ⇒ B1 ∈ C<br>B1 ∈ I ⇒ A1 ∈ I</span></td><td>record both lines; the contrapositive applies more often</td></tr>
           </tbody>
         </table>
       </div>
@@ -768,10 +780,10 @@ section[id],div[id]{scroll-margin-top:14px}
       <p><span class="sym">⊢</span> derives · <span class="sym">∴</span> therefore · <span class="sym">⊥</span> contradiction. Enclose a hypothesis in a box and prefix every line inside it with the assumption's number. On <span class="sym">⊥</span>, <strong>strike the box and carry out only the conclusion.</strong> A derived line left outside the box invalidates the ledger in the same way a stray scratch tag invalidates the board.</p>
       <p style="margin-bottom:8px"><strong>Four common contradiction patterns:</strong></p>
       <ul class="rules warn">
-        <li><span class="sym">c(S) = 1</span> with <span class="sym">{x,y} ⊆ S</span>, <span class="sym">x ≡ y</span>, the rest of <em>S</em> innocent → that bank is impossible, so the other color is the criminal bank.</li>
+        <li><span class="sym">c(S) = 1</span> with <span class="sym gl" tabindex="0" data-tip="Both x and y are members of S.">{x,y} ⊆ S</span>, <span class="sym gl" tabindex="0" data-tip="Same-link: x and y always share a status, so they supply 0 or 2 criminals, never 1.">x ≡ y</span>, the rest of <em>S</em> innocent → that bank is impossible, so the other color is the criminal bank.</li>
         <li>An odd ⊕-cycle → ⊥, without case analysis.</li>
-        <li><span class="sym">c(S) &gt; |S|</span>, or a group's quota exceeding its surviving members → ⊥.</li>
-        <li><span class="sym">|Δrow| + |Δcol| + 1 &gt; criminals remaining</span> → the connection is impossible. <a href="#connector-cost">Count contradictions surface first</a>; test this one before adjacency.</li>
+        <li><span class="sym gl" tabindex="0" data-tip="More criminals required than the set has cells.">c(S) &gt; |S|</span>, or a group's quota exceeding its surviving members → ⊥.</li>
+        <li><span class="sym gl" tabindex="0" data-tip="Manhattan distance plus one: rows apart, plus columns apart, plus the cell you start from. Compare it against the criminals still unplaced.">|Δrow| + |Δcol| + 1 &gt; criminals remaining</span> → the connection is impossible. <a href="#connector-cost">Count contradictions surface first</a>; test this one before adjacency.</li>
       </ul>
     </section>
 
@@ -791,13 +803,13 @@ section[id],div[id]{scroll-margin-top:14px}
         <div style="flex:1 1 320px;min-width:280px">
           <p style="margin-bottom:10px"><strong>Steps 1–4 of the <a href="#worked-example">worked example</a>, in ledger form.</strong> Three clues, one ⊥, two placements:</p>
           <ol class="deriv">
-            <li><span class="ln">01</span><span>(N(C2) ∩ N(B3)) ∩ I = ∅ <span class="prov">— Adam</span></span></li>
+            <li><span class="ln">01</span><span><span class="gl" tabindex="0" data-tip="Intersection and empty set: nothing is both a shared neighbor and innocent.">(N(C2) ∩ N(B3)) ∩ I = ∅</span> <span class="prov">— Adam</span></span></li>
             <li><span class="ln">02</span><span>N(C2) ∩ N(B3) = {B2, C3} <span class="prov">(glossary: excludes C2, B3)</span></span></li>
             <li><span class="ln">03</span><span>∴ <b>{B2, C3} ⊆ C</b> <span class="prov">(1,2) — placed, no tag</span></span></li>
             <li><span class="ln">04</span><span>i({A2, B3, A4, B4}) = 1 <span class="prov">— Gus; B2 ∈ C already removed</span></span></li>
             <li><span class="ln">05</span><span>C ∩ ↓B1 connected in G₄ <span class="prov">— Laura</span></span></li>
-            <li><span class="ln">06</span><span>B3 ∈ I ⇒ B4 ∈ I <span class="prov">(5) prefix rule, B2 ∈ C</span></span></li>
-            <li><span class="ln">07</span><span>B3 ∈ I ⊢ i({A2,B3,A4,B4}) ≥ 2 <span class="bad">⊥</span> <span class="prov">(4,6)</span></span></li>
+            <li><span class="ln">06</span><span><span class="gl" tabindex="0" data-tip="Implication: if B3 turns out innocent, B4 must be innocent too.">B3 ∈ I ⇒ B4 ∈ I</span> <span class="prov">(5) prefix rule, B2 ∈ C</span></span></li>
+            <li><span class="ln">07</span><span><span class="gl" tabindex="0" data-tip="Turnstile: assuming B3 innocent derives at least 2 innocents in that set.">B3 ∈ I ⊢ i({A2,B3,A4,B4}) ≥ 2</span> <span class="bad gl" tabindex="0" data-tip="Contradiction. The assumption on this line is impossible, so its negation is proved.">⊥</span> <span class="prov">(4,6)</span></span></li>
             <li><span class="ln">08</span><span>∴ <b>B3 ∈ C</b> <span class="prov">(7)</span></span></li>
           </ol>
           <p style="margin-top:12px;font-size:.9rem">Line 6 carries the board's key step. <strong>Connectivity along one line is an implication</strong>, and once written as one, combining it with the count on line 4 takes a single step.</p>
