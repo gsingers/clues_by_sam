@@ -18,6 +18,7 @@
   --f-display:"Archivo","Helvetica Neue",Arial,sans-serif;
   --f-body:"Source Serif 4",Georgia,"Times New Roman",serif;
   --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --f-sym:"IBM Plex Mono","Cambria Math","STIX Two Math","Segoe UI Symbol",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
@@ -73,7 +74,7 @@ body{background:var(--ground);color:var(--ink);font-family:var(--f-body);font-si
 .p p{margin:0 0 10px;color:var(--ink-2)}
 .p p:last-child{margin-bottom:0}
 .p strong{color:var(--ink);font-weight:600}
-code,.co{font-family:var(--f-mono);font-size:.86em;font-weight:500;color:var(--ink);background:var(--shade);padding:1px 5px;border-radius:2px;white-space:nowrap}
+code,.co{font-family:var(--f-sym);font-size:.9em;font-weight:500;color:var(--ink);background:var(--shade);padding:1px 5px;border-radius:2px;white-space:nowrap}
 
 .axiom{grid-column:span 12;background:var(--ink);color:var(--ground);padding:20px}
 .axiom h2{font-family:var(--f-display);font-weight:700;font-size:clamp(1.1rem,2.6vw,1.5rem);margin:0 0 6px;letter-spacing:-.015em}
@@ -82,7 +83,7 @@ code,.co{font-family:var(--f-mono);font-size:.86em;font-weight:500;color:var(--i
 
 .terms{margin:0;display:grid;gap:11px}
 .term{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:baseline}
-.term dt{font-family:var(--f-mono);font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap}
+.term dt{font-family:var(--f-sym);font-size:12.5px;font-weight:600;color:var(--ink);white-space:nowrap}
 .term dd{margin:0;color:var(--ink-2);font-size:.95rem}
 .trap{grid-column:1/-1;font-family:var(--f-mono);font-size:11px;line-height:1.45;color:var(--caution);background:var(--caution-bg);padding:5px 8px;border-left:2px solid var(--caution)}
 
@@ -138,7 +139,7 @@ figcaption b{color:var(--ink-2);font-weight:600}
 .gl--up::after{top:auto;bottom:calc(100% + 7px)}
 @media(max-width:600px){.gl::after{max-width:210px}}
 
-.ex{font-family:var(--f-mono);font-size:10.5px;line-height:1.6;color:var(--ink-2);background:var(--panel-2);border-left:2px solid var(--rule-2);padding:7px 10px;margin-top:9px}
+.ex{font-family:var(--f-sym);font-size:11.5px;line-height:1.65;color:var(--ink-2);background:var(--panel-2);border-left:2px solid var(--rule-2);padding:7px 10px;margin-top:9px}
 .p--alt .ex{background:var(--panel)}
 .ex b{color:var(--ink);font-weight:600}
 .ex u{display:block;text-decoration:none;color:var(--ink-3);font-size:9px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:3px}
@@ -148,7 +149,7 @@ figcaption b{color:var(--ink-2);font-weight:600}
 .t th{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:0 10px 6px 0;border-bottom:1px solid var(--rule-2);font-weight:500}
 .t td{padding:8px 10px 8px 0;border-bottom:1px solid var(--rule);color:var(--ink-2);vertical-align:top}
 .t tr:last-child td{border-bottom:0}
-.t .k{font-family:var(--f-mono);font-size:11px;color:var(--ink);font-weight:500}
+.t .k{font-family:var(--f-sym);font-size:12.5px;color:var(--ink);font-weight:600;letter-spacing:.01em}
 .t .go{color:var(--inno);font-weight:600}
 .t .no{color:var(--caution);font-weight:600}
 
@@ -243,13 +244,13 @@ figcaption b{color:var(--ink-2);font-weight:600}
 section[id],div[id]{scroll-margin-top:14px}
 
 /* ---------- notation ---------- */
-.sym{font-family:var(--f-mono);font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap}
-.ledger{font-family:var(--f-mono);font-size:11px;line-height:1.8;color:var(--ink-2);background:var(--panel-2);border:1px solid var(--rule);padding:12px 14px;margin:0;overflow-x:auto;white-space:pre}
+.sym{font-family:var(--f-sym);font-size:13.5px;font-weight:600;letter-spacing:.01em;color:var(--ink);white-space:nowrap}
+.ledger{font-family:var(--f-sym);font-size:12.5px;font-weight:500;line-height:1.8;color:var(--ink-2);background:var(--panel-2);border:1px solid var(--rule);padding:12px 14px;margin:0;overflow-x:auto;white-space:pre}
 .p--alt .ledger{background:var(--panel)}
 .ledger b{color:var(--ink);font-weight:600}
 .ledger u{color:var(--ink-3);text-decoration:none}
 .ledger i{color:var(--crim);font-style:normal;font-weight:600}
-.deriv{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-family:var(--f-mono);font-size:11.5px;line-height:1.5}
+.deriv{margin:0;padding:0;list-style:none;display:grid;gap:9px;font-family:var(--f-sym);font-size:12.5px;font-weight:500;line-height:1.55}
 .deriv li{display:grid;grid-template-columns:auto 1fr;gap:12px;color:var(--ink-2)}
 .deriv .ln{color:var(--ink-3);font-size:9.5px;padding-top:.35em;letter-spacing:.08em}
 .deriv .prov{color:var(--ink-3)}
@@ -748,6 +749,7 @@ They share Barb, so <b>Nancy, Barb and Phil carry one innocent-neighbor count be
       <h2>The board as a structure</h2>
       <p class="sub">Symbols for cells, sets, and counts</p>
       <p>The app records placements and tags record relations on the board. Quantifiers, implications, running counts, and discharged branches fit in neither, so they belong on paper. The notation below is chosen to be quick to write by hand.</p>
+      <p><strong>Most days do not need any of it.</strong> Through Easy, Medium and Tricky the board and three tag colors carry the whole solve, and stopping to transcribe clues costs more than it returns. The ledger earns its time from <strong>Hard upward</strong>, where several structures are live at once, a clue read on move 4 has to be re-read on move 18, and a branch has to be discharged without polluting what is already proved.</p>
       <dl class="terms">
         <div class="term"><dt>V · C · I</dt><dd>The 20 cells and the two sets that partition them: <span class="sym gl" tabindex="0" data-tip="Disjoint union: every cell is in exactly one of C and I, and together they are the whole board.">C ⊎ I = V</span>. A status is written <span class="sym gl" tabindex="0" data-tip="Set membership: B3 is an element of the criminal set.">B3 ∈ C</span>.</dd></div>
         <div class="term"><dt>c(S)</dt><dd>Criminals in the set <em>S</em>. Most clues are assertions about <span class="sym">c</span> of some set, and identifying <em>which set</em> is usually the harder half of the clue.</dd></div>
