@@ -447,7 +447,8 @@ section[id],div[id]{scroll-margin-top:14px}
         </figure>
         <div style="flex:1 1 240px;min-width:220px">
           <ul class="rules">
-            <li>A neighbor-count clue constrains position: high counts require the B/C interior, low counts require corners and edges.</li>
+            <li>A neighbor-count clue is a lower bound on how many neighbors the cell has, so <strong>any count above 5 forces the interior</strong> — B2–B4 and C2–C4, the only cells with 8 neighbors. A low count constrains nothing by itself.</li>
+        <li><strong>Where both the criminal and the innocent neighbor count are known, their sum pins the position class:</strong> 3 is a corner, 5 an edge, 8 the interior.</li>
             <li>Corners are the most constrained cells: 3 neighbors and 2 orthogonal exits. Clues involving a corner reduce to a small number of cases.</li>
             <li>Columns A and D consist entirely of edge cells. Rows hold 4 cells and columns hold 5, so an identical count clue constrains a row more tightly.</li>
           </ul>
@@ -466,7 +467,7 @@ section[id],div[id]{scroll-margin-top:14px}
             <span class="cell crim">C</span><span class="cell q">?</span>
             <span class="cell q">?</span><span class="cell crim">C</span>
           </div>
-          <figcaption><b>ELBOW RULE</b><br>diagonal criminals that are connected force <b>≥1 of the two elbows</b></figcaption>
+          <figcaption><b>ELBOW RULE</b><br>connected diagonal criminals take <b>an elbow</b> — or pay <b>5 extra cells</b> to go around</figcaption>
         </figure>
         <figure class="fig">
           <div class="board sm" role="img" aria-label="Criminals in row 1 and row 5 with rows 2 to 4 banded">
@@ -491,6 +492,7 @@ section[id],div[id]{scroll-margin-top:14px}
       </div>
       <ul class="rules" style="margin-top:16px">
         <li><strong>Connectivity along a single line is an ordering constraint, not a count.</strong> It converts to implications: if the third cell is innocent, every cell past it is innocent. Combine that with any count clue covering the same cells.</li>
+        <li><strong>The elbow rule is a choice, not a certainty.</strong> Two diagonal criminals in one connected set are joined either through an elbow or by a detour around it, and the shortest detour on a 4-wide board costs five further criminals (B2 to C3 via A2, A3, A4, B4, C4). Check the budget: with fewer than five criminals to spare, an elbow is forced.</li>
         <li><strong>Elbow constraints are "at least one", not "exactly one".</strong> Knowing that at least one of two cells is criminal fixes no relation between them, so the pair cannot later be recorded as a <a href="#links">link</a>.</li>
         <li>A <em>not connected</em> clue asserts that a separating line of innocents exists. The board is 4 cells wide, so such walls are short.</li>
         <li><strong>Distance sets a lower bound on headcount.</strong> Connecting two cells requires at least <span class="co gl" tabindex="0" data-tip="Manhattan distance plus one: rows apart, plus columns apart, plus the cell you start from.">|Δrow| + |Δcol| + 1</span> cells of that status.</li>
