@@ -86,6 +86,16 @@ code,.co{font-family:var(--f-mono);font-size:.86em;font-weight:500;color:var(--i
 .term dd{margin:0;color:var(--ink-2);font-size:.95rem}
 .trap{grid-column:1/-1;font-family:var(--f-mono);font-size:11px;line-height:1.45;color:var(--caution);background:var(--caution-bg);padding:5px 8px;border-left:2px solid var(--caution)}
 
+.castwrap{margin-top:22px;padding-top:18px;border-top:1px solid var(--rule)}
+.castlede{margin:0 0 12px}
+.cast{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;max-width:640px}
+.cc{background:var(--panel-2);box-shadow:inset 0 0 0 1px var(--rule);border-radius:2px;padding:7px 9px 8px;min-width:0}
+.p--alt .cc{background:var(--panel)}
+.cc .id{display:block;font-family:var(--f-mono);font-size:9px;font-weight:500;letter-spacing:.14em;color:var(--ink-3)}
+.cc .nm{display:block;font-family:var(--f-display);font-size:.93rem;font-weight:600;line-height:1.2;color:var(--ink);margin-top:1px;overflow-wrap:anywhere}
+.cc .pr{display:block;font-family:var(--f-mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-top:2px}
+@media(max-width:620px){.cc{padding:5px 6px 6px}.cc .nm{font-size:.82rem}.cc .id,.cc .pr{font-size:8px;letter-spacing:.08em}}
+
 .figrow{display:flex;flex-wrap:wrap;gap:22px;align-items:flex-start}
 .fig{margin:0;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
 .board{display:grid;grid-template-columns:repeat(4,26px);gap:2px}
@@ -452,6 +462,31 @@ section[id],div[id]{scroll-margin-top:14px}
             <li>Corners are the most constrained cells: 3 neighbors and 2 orthogonal exits. Clues involving a corner reduce to a small number of cases.</li>
             <li>Columns A and D consist entirely of edge cells. Rows hold 4 cells and columns hold 5, so an identical count clue constrains a row more tightly.</li>
           </ul>
+        </div>
+      </div>
+      <div class="castwrap">
+        <p class="castlede"><strong>One board runs through the whole manual.</strong> Every example below names people from this cast — the puzzle of Sep 9 2026, which is <a href="#worked-example">solved in full at the bottom of the page</a>, clue by clue. Read a coordinate as column then row: Gus is B2, an interior cell with 8 neighbors; Sue is A5, a corner with 3.</p>
+        <div class="cast" role="img" aria-label="The 4 by 5 board of twenty suspects used in every example, columns A to D and rows 1 to 5">
+          <div class="cc"><span class="id">A1</span><span class="nm">Adam</span><span class="pr">doctor</span></div>
+          <div class="cc"><span class="id">B1</span><span class="nm">Barb</span><span class="pr">judge</span></div>
+          <div class="cc"><span class="id">C1</span><span class="nm">Chad</span><span class="pr">cook</span></div>
+          <div class="cc"><span class="id">D1</span><span class="nm">Evie</span><span class="pr">cook</span></div>
+          <div class="cc"><span class="id">A2</span><span class="nm">Frank</span><span class="pr">doctor</span></div>
+          <div class="cc"><span class="id">B2</span><span class="nm">Gus</span><span class="pr">teacher</span></div>
+          <div class="cc"><span class="id">C2</span><span class="nm">Henry</span><span class="pr">builder</span></div>
+          <div class="cc"><span class="id">D2</span><span class="nm">Isaac</span><span class="pr">sailor</span></div>
+          <div class="cc"><span class="id">A3</span><span class="nm">Jane</span><span class="pr">teacher</span></div>
+          <div class="cc"><span class="id">B3</span><span class="nm">Keith</span><span class="pr">farmer</span></div>
+          <div class="cc"><span class="id">C3</span><span class="nm">Laura</span><span class="pr">farmer</span></div>
+          <div class="cc"><span class="id">D3</span><span class="nm">Maria</span><span class="pr">singer</span></div>
+          <div class="cc"><span class="id">A4</span><span class="nm">Nancy</span><span class="pr">sailor</span></div>
+          <div class="cc"><span class="id">B4</span><span class="nm">Oscar</span><span class="pr">singer</span></div>
+          <div class="cc"><span class="id">C4</span><span class="nm">Phil</span><span class="pr">coder</span></div>
+          <div class="cc"><span class="id">D4</span><span class="nm">Ruby</span><span class="pr">coder</span></div>
+          <div class="cc"><span class="id">A5</span><span class="nm">Sue</span><span class="pr">judge</span></div>
+          <div class="cc"><span class="id">B5</span><span class="nm">Terry</span><span class="pr">singer</span></div>
+          <div class="cc"><span class="id">C5</span><span class="nm">Vicky</span><span class="pr">coder</span></div>
+          <div class="cc"><span class="id">D5</span><span class="nm">Wanda</span><span class="pr">builder</span></div>
         </div>
       </div>
     </section>
