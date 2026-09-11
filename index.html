@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>Clues by Sam Field Manual</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -107,12 +108,15 @@ figcaption{font-family:var(--f-mono);font-size:10.5px;line-height:1.5;color:var(
 figcaption b{color:var(--ink-2);font-weight:600}
 
 .rules{margin:0;padding:0;list-style:none;display:grid;gap:10px}
-.rules li{display:grid;grid-template-columns:auto 1fr;gap:10px;color:var(--ink-2);font-size:.95rem}
-.rules li::before{content:"";width:6px;height:6px;margin-top:.52em;background:var(--inno);border-radius:50%}
+.rules li{position:relative;padding-left:16px;color:var(--ink-2);font-size:.95rem}
+.rules li::before{content:"";position:absolute;left:0;top:.52em;width:6px;height:6px;background:var(--inno);border-radius:50%}
 .rules.warn li::before{background:var(--caution)}
 .steps{margin:0;padding:0;list-style:none;counter-reset:s;display:grid;gap:10px}
-.steps li{display:grid;grid-template-columns:auto 1fr;gap:10px;color:var(--ink-2);font-size:.95rem;counter-increment:s}
-.steps li::before{content:counter(s);font-family:var(--f-mono);font-size:10px;font-weight:600;color:var(--inno);background:var(--inno-bg);width:18px;height:18px;display:grid;place-items:center;margin-top:.24em;border-radius:2px}
+.steps li{position:relative;padding-left:28px;color:var(--ink-2);font-size:.95rem;counter-increment:s}
+.steps li::before{content:counter(s);position:absolute;left:0;top:.24em;font-family:var(--f-mono);font-size:10px;font-weight:600;color:var(--inno);background:var(--inno-bg);width:18px;height:18px;display:grid;place-items:center;border-radius:2px}
+
+.p a{color:var(--inno);text-decoration:none;border-bottom:1px solid var(--rule-2)}
+.p a:hover{color:var(--ink);border-bottom-color:var(--ink)}
 
 .scroll{overflow-x:auto}
 .t{width:100%;border-collapse:collapse;font-size:.9rem;min-width:340px}
@@ -190,13 +194,51 @@ figcaption b{color:var(--ink-2);font-weight:600}
 .p--alt .tagnote{background:var(--panel)}
 
 .foot{margin-top:20px;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;color:var(--ink-3)}
+/* ---------- masthead source link ---------- */
+.masttop{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;justify-content:space-between}
+.srclink{font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--inno);text-decoration:none;border-bottom:1px solid var(--rule-2);white-space:nowrap}
+.srclink:hover{color:var(--ink);border-bottom-color:var(--ink)}
+
+/* ---------- contents ---------- */
+.toc{border:1px solid var(--rule);background:var(--panel);padding:16px 20px 18px;margin-bottom:22px;display:grid;gap:20px}
+@media(min-width:860px){.toc{grid-template-columns:1fr 2.3fr 1fr;gap:28px}}
+.toc h2{font-family:var(--f-mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-3);font-weight:500;margin:0 0 10px;padding-bottom:7px;border-bottom:1px solid var(--rule)}
+.toc h2 a{color:inherit;text-decoration:none}
+.toc h2 a:hover{color:var(--ink)}
+.toc ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.toc li{font-size:.93rem;line-height:1.3}
+.toc a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid transparent}
+.toc a:hover{color:var(--ink);border-bottom-color:var(--rule-2)}
+.toccols{display:grid;gap:16px}
+@media(min-width:600px){.toccols{grid-template-columns:1fr 1fr;gap:16px 24px}}
+.toc .grp{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 6px}
+section[id],div[id]{scroll-margin-top:14px}
+.part b{color:var(--ink-2);font-weight:600}
+
+/* ---------- notation ---------- */
+.sym{font-family:var(--f-mono);font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap}
+.ledger{font-family:var(--f-mono);font-size:11px;line-height:1.8;color:var(--ink-2);background:var(--panel-2);border:1px solid var(--rule);padding:12px 14px;margin:0;overflow-x:auto;white-space:pre}
+.p--alt .ledger{background:var(--panel)}
+.ledger b{color:var(--ink);font-weight:600}
+.ledger u{color:var(--ink-3);text-decoration:none}
+.ledger i{color:var(--crim);font-style:normal;font-weight:600}
+.deriv{margin:0;padding:0;list-style:none;display:grid;gap:8px;font-family:var(--f-mono);font-size:11.5px;line-height:1.5}
+.deriv li{display:grid;grid-template-columns:auto 1fr;gap:12px;color:var(--ink-2)}
+.deriv .ln{color:var(--ink-3);font-size:9.5px;padding-top:.35em;letter-spacing:.08em}
+.deriv .prov{color:var(--ink-3)}
+.deriv b{color:var(--ink);font-weight:600}
+.deriv .bad{color:var(--crim);font-weight:600}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 
 <div class="wrap">
 
   <header class="mast">
-    <div class="kicker">Deduction reference · 4 × 5 board · columns A–D · rows 1–5</div>
+    <div class="masttop">
+      <div class="kicker">Deduction reference · 4 × 5 board · columns A–D · rows 1–5</div>
+      <a class="srclink" href="https://cluesbysam.com/" target="_blank" rel="noopener">Play · cluesbysam.com ↗</a>
+    </div>
     <h1>Clues by Sam Field Manual</h1>
     <p class="dek">Everything that fires more than once, in the order you'll reach for it. Built for the back half of the week, when the clue text stops being the hard part and the interactions start.</p>
     <div class="ladder">
@@ -210,17 +252,75 @@ figcaption b{color:var(--ink-2);font-weight:600}
     </div>
   </header>
 
+  <nav class="toc" aria-label="Contents">
+    <div>
+      <h2><a href="#part-basics">Basics</a></h2>
+      <ul>
+        <li><a href="#premise">The premise</a></li>
+        <li><a href="#vocabulary">Vocabulary, and where it bites</a></li>
+        <li><a href="#graphs">Two graphs, one board</a></li>
+        <li><a href="#geometry">Board geometry worth memorizing</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2><a href="#part-connectivity">Advanced</a></h2>
+      <div class="toccols">
+        <div>
+          <p class="grp">Connectivity</p>
+          <ul>
+            <li><a href="#connectivity">The connectivity toolkit</a></li>
+            <li><a href="#connector-cost">Connector cost</a></li>
+          </ul>
+          <p class="grp" style="margin-top:14px">Tagging</p>
+          <ul>
+            <li><a href="#banks">Three banks</a></li>
+            <li><a href="#links">What makes a link</a></li>
+            <li><a href="#comparatives">Comparative clues</a></li>
+            <li><a href="#pairs">Branch-independent contribution</a></li>
+            <li><a href="#groups">Before you spend a color</a></li>
+            <li><a href="#chain-pays">When a chain pays</a></li>
+            <li><a href="#tag-hygiene">Tag hygiene</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="grp">Notation</p>
+          <ul>
+            <li><a href="#notation-structure">The board as a structure</a></li>
+            <li><a href="#notation-pairs">Pairs are equations</a></li>
+            <li><a href="#notation-translate">Clue to symbol</a></li>
+            <li><a href="#ledger">The ledger</a></li>
+            <li><a href="#contradiction">Contradiction and discharge</a></li>
+            <li><a href="#notation-hygiene">Notation hygiene</a></li>
+          </ul>
+          <p class="grp" style="margin-top:14px">Procedure</p>
+          <ul>
+            <li><a href="#counting">Counting, done fully</a></li>
+            <li><a href="#case-analysis">Case analysis</a></li>
+            <li><a href="#stuck">Stuck? Run this order</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2><a href="#part-example">Example</a></h2>
+      <ul>
+        <li><a href="#worked-example">A complete solve, tag by tag</a></li>
+        <li><a href="#takeaways">What this board taught</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <div class="sheet">
 
-    <section class="axiom">
+    <section class="axiom" id="premise">
       <p class="sub">The premise everything rests on</p>
       <h2>Every clue is true — including clues from criminals.</h2>
       <p>There is no lying layer. This is constraint satisfaction, not interrogation. It follows that a clue never expires: one you used on move 3 is still binding on move 20, and the intended crack on a hard board usually needs an early clue re-read in light of something learned later. Dim a clue only when it is genuinely exhausted, not when it is merely unhelpful right now.</p>
     </section>
 
-    <div class="part">Rules &amp; geometry</div>
+    <div class="part" id="part-basics"><b>Basics</b> · Rules &amp; geometry</div>
 
-    <section class="p s7">
+    <section class="p s7" id="vocabulary">
       <h2>Vocabulary, and where it bites</h2>
       <p class="sub">Misreads outnumber missed deductions</p>
       <dl class="terms">
@@ -258,7 +358,7 @@ figcaption b{color:var(--ink-2);font-weight:600}
       </dl>
     </section>
 
-    <section class="p p--alt s5">
+    <section class="p p--alt s5" id="graphs">
       <h2>Two graphs, one board</h2>
       <p class="sub">Switch modes on the word "connected"</p>
       <div class="figrow">
@@ -282,7 +382,7 @@ figcaption b{color:var(--ink-2);font-weight:600}
       <p style="margin-top:14px">Counting clues use the left graph. Connectivity clues use the right one. When you read <em>connected</em>, stop counting and start thinking in blobs and walls.</p>
     </section>
 
-    <section class="p">
+    <section class="p" id="geometry">
       <h2>Board geometry worth memorizing</h2>
       <p class="sub">The grid is only 4 wide — structure does real work</p>
       <div class="figrow">
@@ -326,7 +426,9 @@ figcaption b{color:var(--ink-2);font-weight:600}
       </div>
     </section>
 
-    <section class="p p--alt s8">
+    <div class="part" id="part-connectivity"><b>Advanced</b> · Connectivity</div>
+
+    <section class="p p--alt s8" id="connectivity">
       <h2>The connectivity toolkit</h2>
       <p class="sub">The only global clue type in the game</p>
       <div class="figrow">
@@ -366,7 +468,7 @@ figcaption b{color:var(--ink-2);font-weight:600}
       </ul>
     </section>
 
-    <section class="p s4">
+    <section class="p s4" id="connector-cost">
       <h2>Connector cost</h2>
       <p class="sub">Minimum criminals to link two cells</p>
       <div class="calc">
@@ -400,9 +502,9 @@ figcaption b{color:var(--ink-2);font-weight:600}
       <p style="margin-top:12px;font-size:.9rem">Pick any two cells. If the board's criminal count can't cover the floor, the connection is impossible — a contradiction you can bank.</p>
     </section>
 
-    <div class="part">The tagging system</div>
+    <div class="part" id="part-tagging"><b>Advanced</b> · The tagging system</div>
 
-    <section class="p s7">
+    <section class="p s7" id="banks">
       <h2>Three banks</h2>
       <p class="sub">Tags record relations, not reminders</p>
       <p>The board records placements. Tags exist to record structure you've derived but can't place yet. Treat the palette as a scarce register with assigned roles — never let two meanings share a color at once.</p>
@@ -435,7 +537,7 @@ figcaption b{color:var(--ink-2);font-weight:600}
       <p style="margin-top:14px;font-size:.9rem;color:var(--ink-3)"><strong style="color:var(--ink)">Palette reality:</strong> the corner tap cycles only three colors before wrapping to none. More need a long-press, and the card's second corner is a separate slot. Budget accordingly.</p>
     </section>
 
-    <section class="p p--alt s5">
+    <section class="p p--alt s5" id="links">
       <h2>What makes a link</h2>
       <p class="sub">Only these enter Bank 1</p>
       <div class="scroll">
@@ -453,7 +555,7 @@ figcaption b{color:var(--ink-2);font-weight:600}
       <p style="margin-top:14px"><strong>Same-links are the half people miss.</strong> Two cells forced to share a status take the <em>same</em> color and extend the chain exactly as well as a differ-link does.</p>
     </section>
 
-    <section class="p s7">
+    <section class="p s7" id="comparatives">
       <h2>Comparative clues</h2>
       <p class="sub">"Equal number of…" · "more … than …"</p>
       <p>These are neither counts nor links — they constrain a <strong>difference between two neighborhoods</strong>, and they don't get a color. Three ways to get purchase:</p>
@@ -465,7 +567,7 @@ figcaption b{color:var(--ink-2);font-weight:600}
       <p style="margin-top:12px">Bound the small side too — a comparative against a corner (3 neighbors) is far tighter than one against an interior cell (8).</p>
     </section>
 
-    <section class="p p--alt s5">
+    <section class="p p--alt s5" id="pairs">
       <h2>Branch-independent contribution</h2>
       <p class="sub">The single highest-yield move in the game</p>
       <p>A differ-pair contributes <strong>exactly one criminal and exactly one innocent, in both worlds.</strong> A same-pair contributes <strong>zero or two — always even.</strong> Neither needs resolving to be used.</p>
@@ -478,7 +580,7 @@ figcaption b{color:var(--ink-2);font-weight:600}
       <p style="margin-top:14px"><strong>The value of a pair is what it does while unresolved</strong>, not what happens when it collapses. Don't wait to break a chain — spend it.</p>
     </section>
 
-    <section class="p s7">
+    <section class="p s7" id="groups">
       <h2>Before you spend a color</h2>
       <p class="sub">Translate · prune · quota</p>
       <ol class="flow">
@@ -517,7 +619,7 @@ figcaption b{color:var(--ink-2);font-weight:600}
       <p style="margin-top:12px"><strong>A satisfied group isn't something to track — it's a batch of placements waiting to be collected.</strong></p>
     </section>
 
-    <section class="p p--alt s5">
+    <section class="p p--alt s5" id="chain-pays">
       <h2>When a chain pays</h2>
       <p class="sub">Check these after every placement</p>
       <ul class="rules">
@@ -529,7 +631,7 @@ figcaption b{color:var(--ink-2);font-weight:600}
       <p style="margin-top:14px">Untagged, being stuck means re-deriving the board. Tagged, it means <strong>looking at the colored cells first</strong>.</p>
     </section>
 
-    <section class="p">
+    <section class="p" id="tag-hygiene">
       <h2>Tag hygiene</h2>
       <p class="sub">Where clean solves are won and lost</p>
       <div class="figrow" style="gap:26px">
@@ -556,9 +658,139 @@ figcaption b{color:var(--ink-2);font-weight:600}
       </div>
     </section>
 
-    <div class="part">Procedure</div>
+    <div class="part" id="part-notation"><b>Advanced</b> · Notation &amp; the paper ledger</div>
 
-    <section class="p s6">
+    <section class="p s7" id="notation-structure">
+      <h2>The board as a structure</h2>
+      <p class="sub">A handful of symbols carries every clue in the game</p>
+      <p>The app records placements. Tags record relations you can point at on the board. Everything else — quantifiers, implications, running counts, dead branches — needs a page beside you, and it only pays if the notation is short enough to write faster than you think.</p>
+      <dl class="terms">
+        <div class="term"><dt>V · C · I</dt><dd>The 20 cells and the two sets that partition them: <span class="sym">C ⊎ I = V</span>. A status is written <span class="sym">B3 ∈ C</span>.</dd></div>
+        <div class="term"><dt>c(S)</dt><dd>Criminals in the set <em>S</em>. <strong>The workhorse.</strong> Nearly every clue in the game is an assertion about <span class="sym">c</span> of some set — and the hard part of a clue is almost always <em>which set</em>.</dd></div>
+        <div class="term"><dt>i(S)</dt><dd><span class="sym">|S| − c(S)</span>. Writing the second line every time is complement counting made mechanical instead of remembered.</dd></div>
+        <div class="term"><dt>N(x) · N₄(x)</dt><dd>The 8-neighborhood, and the orthogonal one. <span class="sym">G₄</span> is the graph the word <em>connected</em> lives in.</dd></div>
+        <div class="term"><dt>x↑ x↓ x← x→</dt><dd>The one cell <strong>directly</strong> adjacent that way. Undefined at the border — <span class="sym">A1↑</span> does not exist, which is different from being innocent.</dd></div>
+        <div class="term">
+          <dt>↑x ↓x ←x →x</dt>
+          <dd>The whole line beyond <em>x</em>. <span class="sym">↓B1 = {B2,B3,B4,B5}</span>.</dd>
+          <div class="trap">Which side the arrow sits on is the entire difference between the game's two most-confused clue types. Get it right while transcribing and the misread can't reach the deduction.</div>
+        </div>
+        <div class="term"><dt>R1…R5 · A…D</dt><dd>The nine lines, for the count ledger. Rows cap at 4, columns at 5.</dd></div>
+      </dl>
+      <p style="margin-top:12px;font-size:.9rem"><strong>Typing rather than writing?</strong> <span class="co">&lt;=</span> for ⊆, <span class="co">&amp;</span> for ∩, <span class="co">+</span> for ⊕, <span class="co">=</span> for ≡, <span class="co">-&gt;</span> for ⇒, <span class="co">!!</span> for ⊥, <span class="co">all</span> and <span class="co">some</span> for ∀ and ∃. <span class="co">c(S)</span> stays exactly as it is.</p>
+    </section>
+
+    <section class="p p--alt s5" id="notation-pairs">
+      <h2>Pairs are equations</h2>
+      <p class="sub">The written half of Bank 1</p>
+      <p>A tag color is a 2-coloring of a graph. The page records the <em>edges</em> that force it:</p>
+      <ul class="rules">
+        <li><span class="sym">x ⊕ y</span> — a differ-link. Exactly one of them is criminal: <span class="sym">c({x,y}) = 1</span>, in both worlds.</li>
+        <li><span class="sym">x ≡ y</span> — a same-link. <span class="sym">c({x,y}) ≡ 0 (mod 2)</span>.</li>
+      </ul>
+      <p style="margin-top:12px">⊕ is worth the keystroke because it <em>is</em> exclusive or, so links compose without thought: <span class="sym">x ⊕ y</span> with <span class="sym">y ⊕ z</span> gives <span class="sym">x ≡ z</span>. Count the ⊕ edges along any path between two cells — <strong>odd means they differ, even means they match.</strong></p>
+      <p><strong>An odd ⊕-cycle is ⊥.</strong> The chain can't be 2-colored, so it can't be tagged either, and whatever assumption produced it is dead. That's <em>forced to differ, same color</em> turned into something you can see rather than recall.</p>
+      <p>Write the chain as two columns, <span class="sym">α | β</span>. Those columns <em>are</em> the two tag colors: the page says which cells, the board says where.</p>
+    </section>
+
+    <section class="p" id="notation-translate">
+      <h2>Clue to symbol</h2>
+      <p class="sub">Transcribe all of them before you place anything</p>
+      <p>Most losses are translation, not deduction. Rewriting each clue once, in a form that can't hide a quantifier, is the cheapest insurance in the game — and it front-loads the work of <a href="#groups">translating the property into cells</a>.</p>
+      <div class="scroll" style="margin-top:14px">
+        <table class="t">
+          <thead><tr><th>As the game writes it</th><th>Ledger form</th><th>What the symbols force you to notice</th></tr></thead>
+          <tbody>
+            <tr><td>Exactly 2 doctors are criminals</td><td class="k">c(D) = 2</td><td>also <span class="sym">i(D) = |D| − 2</span></td></tr>
+            <tr><td>All doctors are criminals</td><td class="k">D ⊆ C &nbsp;·&nbsp; D ≠ ∅</td><td>the second line is the existential import</td></tr>
+            <tr><td>Any doctor is a criminal</td><td class="k">D ⊆ C</td><td>no second line — that's the whole difference</td></tr>
+            <tr><td>At least one of them is a criminal</td><td class="k">c(X) ≥ 1</td><td><span class="no">never a link</span> — keep it out of Bank 1</td></tr>
+            <tr><td>Both X and Y are criminals</td><td class="k">{X,Y} ⊆ C, |{X,Y}| = 2</td><td>exactly 2, not "some"</td></tr>
+            <tr><td>Barb has exactly 2 criminal neighbors</td><td class="k">c(N(B1)) = 2</td><td>the 8-graph, and B1 is not in it</td></tr>
+            <tr><td>Exactly 1 doctor has a criminal directly above them</td><td class="k">c({ x↑ : x ∈ D, x ∉ R1 }) = 1</td><td>the tagged cells aren't the doctors; row 1 prunes</td></tr>
+            <tr><td>Henry and Keith share no innocent neighbors</td><td class="k">(N(C2) ∩ N(B3)) ∩ I = ∅</td><td>the intersection excludes C2 and B3 themselves</td></tr>
+            <tr><td>More farmers than singers are criminals</td><td class="k">c(F) &gt; c(S)</td><td><span class="sym">c(S) = 0</span> is still allowed</td></tr>
+            <tr><td>An equal number of farmers and singers</td><td class="k">c(F) = c(S)</td><td>transitive — fuse equalities into one class</td></tr>
+            <tr><td>Farmers have the most criminals</td><td class="k">c(F) &gt; c(X) for every other X</td><td>strict and unique; nobody ties</td></tr>
+            <tr><td>An odd number of cooks are criminals</td><td class="k">c(K) ≡ 1 (mod 2)</td><td>remainder down to 2 cells → a ⊕ link</td></tr>
+            <tr><td>Exactly 1 criminal between Sue and Wanda</td><td class="k">c( (A5, D5) ) = 1</td><td>open interval — the ends are excluded</td></tr>
+            <tr><td>All criminals below Barb are connected</td><td class="k">C ∩ ↓B1 connected in G₄</td><td>an ordering constraint: <span class="sym">B3 ∈ I ⇒ B4, B5 ∈ I</span></td></tr>
+            <tr><td>Henry and Keith are not connected</td><td class="k">∃ W ⊆ I separating them in G₄</td><td>go hunt the wall; at 4 wide they're cheap</td></tr>
+            <tr><td>If Adam is a criminal, so is Barb</td><td class="k">A1 ∈ C ⇒ B1 ∈ C<br>B1 ∈ I ⇒ A1 ∈ I</td><td>write both lines; the contrapositive fires more often</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="p p--alt s7" id="ledger">
+      <h2>The ledger</h2>
+      <p class="sub">One page, four blocks, same layout every board</p>
+      <p>Fixed positions matter more than neatness: when you stall, you want to reread <em>by block</em> rather than search a page of prose.</p>
+      <pre class="ledger"><u>CLUES</u>                             <u>LINES</u>   c/cap  i/cap
+<b>1</b> ▣ (N(C2) ∩ N(B3)) ∩ I = ∅       R1       _/4    _/4
+<b>2</b> ▢ i({A2,B3,A4,B4}) = 1          R2       2/4    _/4
+<b>3</b> ◐ C ∩ ↓B1 connected in G₄       R3       _/4    _/4
+<b>4</b> ▢ c(F) = c(S)                   A        _/5    _/5
+
+<u>CHAIN X</u>     α  |  β          <u>GROUPS</u>
+            C2 |  B3          ●1  {A2,B2,C2}   c = 1
+            D4 |  A4          ●2  {B4,C4}      c = 1
+
+<u>SCRATCH</u>  [ A1 ∈ C ⊢ … <i>⊥</i> ]   ∴ A1 ∈ I   <u>discharged</u></pre>
+      <ul class="rules" style="margin-top:14px">
+        <li><strong>Clues get three states, not two.</strong> <span class="sym">▢</span> live · <span class="sym">◐</span> quiet for now, reread at the first stall · <span class="sym">▣</span> genuinely exhausted. The app's dim is binary; <a href="#premise">clues never expire</a>, so the middle mark is the one that matters.</li>
+        <li><strong>LINES is complement counting with a home.</strong> Both columns, all nine lines, updated on every placement.</li>
+        <li><strong>GROUPS is the color legend</strong> the <a href="#tag-hygiene">tag rules</a> demand you write down. Color, set, count — retire the row and the color together.</li>
+        <li><strong>CHAIN is two columns because a chain has two banks.</strong> If you ever need a third column, you've recorded a group, not a chain.</li>
+      </ul>
+    </section>
+
+    <section class="p s5" id="contradiction">
+      <h2>Contradiction and discharge</h2>
+      <p class="sub">Paper's version of the scratch color</p>
+      <p><span class="sym">⊢</span> derives · <span class="sym">∴</span> therefore · <span class="sym">⊥</span> dead. Fence a hypothesis in a box, prefix every line inside it with the assumption's number, and on <span class="sym">⊥</span> <strong>strike the box and lift out only the conclusion.</strong> A derived line that escapes the fence poisons the ledger exactly the way a stray scratch tag poisons the board — and is just as hard to find later.</p>
+      <p style="margin-bottom:8px"><strong>Four signatures worth recognizing on sight:</strong></p>
+      <ul class="rules warn">
+        <li><span class="sym">c(S) = 1</span> with <span class="sym">{x,y} ⊆ S</span>, <span class="sym">x ≡ y</span>, the rest of <em>S</em> innocent → that bank is dead, so the other color is the criminal one.</li>
+        <li>An odd ⊕-cycle → ⊥ with no case analysis at all.</li>
+        <li><span class="sym">c(S) &gt; |S|</span>, or a group's quota exceeding its surviving members → ⊥.</li>
+        <li><span class="sym">|Δrow| + |Δcol| + 1 &gt; criminals remaining</span> → the connection is impossible. <a href="#connector-cost">Count contradictions surface first</a>; test this one before adjacency.</li>
+      </ul>
+    </section>
+
+    <section class="p" id="notation-hygiene">
+      <h2>Notation hygiene</h2>
+      <p class="sub">Plus the same board, worked on paper</p>
+      <div class="figrow" style="gap:26px">
+        <div style="flex:1 1 300px;min-width:260px">
+          <ul class="rules warn">
+            <li><strong>Never write what the board already shows.</strong> Placements live in the app. The page holds relations, counts and provenance — nothing you could read off the grid.</li>
+            <li><strong>Every derived line carries its sources.</strong> <span class="sym">(4,6)</span> means clues 4 and 6. When you stall, reread by provenance instead of rereading everything.</li>
+            <li><strong>Strike, don't erase.</strong> A struck line ending in ⊥ is a result — it's the reason you won't retry that branch at move 20.</li>
+            <li><strong>One symbol, one meaning, all board.</strong> ⊕ never drifts into "at least one." If a clue won't sit in the notation, it's a group, not a link.</li>
+            <li><strong>Transcribe first, deduce second.</strong> The transcription pass is where "directly above" and "above" separate, and it costs a minute.</li>
+          </ul>
+        </div>
+        <div style="flex:1 1 320px;min-width:280px">
+          <p style="margin-bottom:10px"><strong>Steps 1–4 of the <a href="#worked-example">worked example</a>, in ledger form.</strong> Three clues, one ⊥, two placements:</p>
+          <ol class="deriv">
+            <li><span class="ln">01</span><span>(N(C2) ∩ N(B3)) ∩ I = ∅ <span class="prov">— Adam</span></span></li>
+            <li><span class="ln">02</span><span>N(C2) ∩ N(B3) = {B2, C3} <span class="prov">(glossary: excludes C2, B3)</span></span></li>
+            <li><span class="ln">03</span><span>∴ <b>{B2, C3} ⊆ C</b> <span class="prov">(1,2) — placed, no tag</span></span></li>
+            <li><span class="ln">04</span><span>i({A2, B3, A4, B4}) = 1 <span class="prov">— Gus; B2 ∈ C already removed</span></span></li>
+            <li><span class="ln">05</span><span>C ∩ ↓B1 connected in G₄ <span class="prov">— Laura</span></span></li>
+            <li><span class="ln">06</span><span>B3 ∈ I ⇒ B4 ∈ I <span class="prov">(5) prefix rule, B2 ∈ C</span></span></li>
+            <li><span class="ln">07</span><span>B3 ∈ I ⊢ i({A2,B3,A4,B4}) ≥ 2 <span class="bad">⊥</span> <span class="prov">(4,6)</span></span></li>
+            <li><span class="ln">08</span><span>∴ <b>B3 ∈ C</b> <span class="prov">(7)</span></span></li>
+          </ol>
+          <p style="margin-top:12px;font-size:.9rem">Line 6 is the whole trick of that board, and in prose it took a paragraph. <strong>Connectivity down one line is an implication</strong> — once it's written as one, colliding it with the count on line 4 is a single step.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="part" id="part-procedure"><b>Advanced</b> · Procedure</div>
+
+    <section class="p s6" id="counting">
       <h2>Counting, done fully</h2>
       <p class="sub">Complement counting closes more Evil boards than cleverness</p>
       <p>Track <strong>both</strong> criminals and innocents for all nine lines. If a column holds exactly 3 criminals it also holds exactly 2 innocents — and the second fact fires first surprisingly often.</p>
@@ -570,7 +802,7 @@ figcaption b{color:var(--ink-2);font-weight:600}
       </ul>
     </section>
 
-    <section class="p s6">
+    <section class="p s6" id="case-analysis">
       <h2>Case analysis</h2>
       <p class="sub">For when the board genuinely stalls</p>
       <p>Assume a cell is criminal, propagate hard, hunt for a contradiction. Find one and that cell is <strong>provably innocent</strong> — a deduction, not a guess.</p>
@@ -583,7 +815,7 @@ figcaption b{color:var(--ink-2);font-weight:600}
       </ol>
     </section>
 
-    <section class="p">
+    <section class="p" id="stuck">
       <h2>Stuck? Run this order</h2>
       <p class="sub">Breadth beats depth — the crack is rarely where you're staring</p>
       <ol class="steps">
@@ -599,9 +831,9 @@ figcaption b{color:var(--ink-2);font-weight:600}
       <p style="margin-top:14px">One standing caution: unsupported taps are blocked rather than penalized, so it's possible to probe the solver for answers. It works, and it substitutes its reasoning for yours — a blocked tap is best read as a signal you jumped ahead, not as a free query.</p>
     </section>
 
-    <div class="part">Worked example · Sep 9 2026 · Tricky</div>
+    <div class="part" id="part-example"><b>Example</b> · Sep 9 2026 · Tricky</div>
 
-    <section class="p">
+    <section class="p" id="worked-example">
       <h2>A complete solve, tag by tag</h2>
       <p class="sub">20 of 20 · no hints · no blocked taps</p>
       <div class="ex-lead">
@@ -627,11 +859,11 @@ figcaption b{color:var(--ink-2);font-weight:600}
       </div>
     </section>
 
-    <section class="p p--alt">
+    <section class="p p--alt" id="steps-panel">
       <div id="steps"></div>
     </section>
 
-    <section class="p">
+    <section class="p" id="takeaways">
       <h2>What this board taught</h2>
       <p class="sub">Three things worth carrying forward</p>
       <ul class="rules">
