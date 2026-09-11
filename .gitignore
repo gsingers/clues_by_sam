@@ -1,0 +1,5 @@
+# Local History extension (VS Code)
+.history/
+
+# macOS
+.DS_Store
