@@ -465,7 +465,7 @@ section[id],div[id]{scroll-margin-top:14px}
         </div>
       </div>
       <div class="castwrap">
-        <p class="castlede"><strong>One board runs through the whole manual.</strong> Every example below names people from this cast — the puzzle of Sep 9 2026, which is <a href="#worked-example">solved in full at the bottom of the page</a>, clue by clue. Read a coordinate as column then row: Gus is B2, an interior cell with 8 neighbors; Sue is A5, a corner with 3.</p>
+        <p class="castlede"><strong>Example Board from Sep 9 2026</strong> This board is <a href="#worked-example">solved in full at the bottom of the page</a>, clue by clue, and will be used for other examples throughout. Read a coordinate as column then row: Gus is B2, an interior cell with 8 neighbors; Sue is A5, a corner with 3.</p>
         <div class="cast" role="img" aria-label="The 4 by 5 board of twenty suspects used in every example, columns A to D and rows 1 to 5">
           <div class="cc"><span class="id">A1</span><span class="nm">Adam</span><span class="pr">doctor</span></div>
           <div class="cc"><span class="id">B1</span><span class="nm">Barb</span><span class="pr">judge</span></div>
@@ -575,6 +575,7 @@ section[id],div[id]{scroll-margin-top:14px}
       <p class="sub">Assigning the three tag colors</p>
       <p>Each card holds a colored tag on its corner, cycled by tapping it. The board itself already records every placement, so a tag is worth spending only on <strong>a relation you have proved but cannot yet resolve</strong> — two cells that must differ, a group known to contain exactly one criminal, a cell being tested by assumption.</p>
       <p>The palette is the constraint. Three colors are available by tap, and a meaning has to stay attached to its color for as long as the structure lives, so the colors are best treated as three assigned registers rather than free highlighting. The three <em>banks</em> below are those registers, listed in the order they should claim a color when the palette is tight.</p>
+      <p>A tag can record <em>that</em> some cells are related, never <em>what</em> the relation is. That belongs in the <strong>margin</strong>: a written note kept beside the board, holding each color's meaning — which cells wear it and what is known about them. A color without its margin line is unusable within a few moves. The <a href="#part-notation">notation section</a> gives the margin a fixed layout, and sets out the shorthand used in the examples below.</p>
       <p style="margin-bottom:14px">One word of warning about that term: <strong>bank</strong> also names each half of a chain — the set of cells that turn out to be criminal, and the set that turn out to be innocent. Bank 1 holds that structure and needs two colors for it; Banks 2 and 3 are single-color roles.</p>
       <div class="banks">
         <div class="bank">
@@ -583,7 +584,7 @@ section[id],div[id]{scroll-margin-top:14px}
             <div class="role">Bank 1 · standing</div>
             <h3>The chain</h3>
             <p>Cells joined by <em>same</em>- and <em>differ</em>-links. However many cells it holds, a chain always has exactly <strong>two banks — so exactly two colors.</strong> Either color 1 is the criminal set and color 2 the innocent set, or the reverse.</p>
-            <div class="ex"><u>Example</u>"Exactly 1 of Frank and Nancy is a criminal" → <b>A2 ⊕ A4</b>. Tag A2 color 1, A4 color 2.<br>A later parity clue forces Nancy and Oscar to match → B4 takes <b>color 2</b>, beside Nancy.<br>Three cells, one chain, still two colors. Placing any one of them resolves all three.</div>
+            <div class="ex"><u>Example</u>"Exactly 1 of Frank and Nancy is a criminal" → <b><span class="gl" tabindex="0" data-tip="Exclusive or: exactly one of A2 and A4 is a criminal, never both and never neither. Written out in the notation section.">A2 ⊕ A4</span></b>. Tag A2 color 1, A4 color 2.<br>A later parity clue forces Nancy and Oscar to match → B4 takes <b>color 2</b>, beside Nancy.<br>Three cells, one chain, still two colors. Placing any one of them resolves all three.</div>
           </div>
         </div>
         <div class="bank">
@@ -592,7 +593,7 @@ section[id],div[id]{scroll-margin-top:14px}
             <div class="role">Bank 2 · transient</div>
             <h3>Group colors</h3>
             <p>One color marks one exclusivity group with a known count. Overlapping groups are the reason to spend a color: containment, arithmetic remainder, and overlap squeeze are hard to see in clue text and immediate in color. Retire the color as soon as the group resolves.</p>
-            <div class="ex"><u>Example</u>"Exactly 1 singer is a criminal" — Maria, Oscar, Terry → tag D3, B4, B5 color 3.<br>Margin: <b>●3 = {D3,B4,B5}, c = 1</b>.<br>Oscar is later placed criminal, which fills the quota: <b>D3 and B5 are innocent</b>, and color 3 is free again.</div>
+            <div class="ex"><u>Example</u>"Exactly 1 singer is a criminal" — Maria, Oscar, Terry → tag D3, B4, B5 color 3.<br>Margin: <b><span class="gl" tabindex="0" data-tip="Color 3 marks the cells D3, B4 and B5, and exactly one of them is a criminal. Braces list the members of a set.">●3 = {D3,B4,B5}, c = 1</span></b> — color 3, those three cells, exactly one criminal among them.<br>Oscar is later placed criminal, which fills the quota: <b>D3 and B5 are innocent</b>, and color 3 is free again.</div>
           </div>
         </div>
         <div class="bank">
@@ -601,7 +602,7 @@ section[id],div[id]{scroll-margin-top:14px}
             <div class="role">Bank 3 · scratch</div>
             <h3>Hypotheses only</h3>
             <p>One color, always the same one, cleared completely before normal play resumes. A speculative mark left among the standing banks invalidates every later deduction, and the resulting error is hard to locate.</p>
-            <div class="ex"><u>Example</u>Assume Chad is a criminal. Mark C1 and everything it forces in the scratch color only.<br>If that forces two criminals into a line capped at one → <b>⊥</b>, so <b>Chad is innocent</b>: place it.<br>Either way — contradiction or not — clear every scratch mark before the next deduction.</div>
+            <div class="ex"><u>Example</u>Assume Chad is a criminal. Mark C1 and everything it forces in the scratch color only.<br>If that forces two criminals into a line capped at one → <b><span class="gl" tabindex="0" data-tip="Contradiction: the assumption is impossible, so its opposite is proved.">⊥</span></b>, so <b>Chad is innocent</b>: place it.<br>Either way — contradiction or not — clear every scratch mark before the next deduction.</div>
           </div>
         </div>
       </div>
@@ -711,7 +712,7 @@ section[id],div[id]{scroll-margin-top:14px}
             <li><strong>Colors count banks, not cells.</strong> Three colors on three chained cells discards the structure the chain encodes. Merge them to two.</li>
             <li><strong>Don't tag what a line already shows.</strong> A count over a whole row or column needs no color. Colors are for scattered constraints.</li>
             <li><strong>Do not tag a link that resolves immediately.</strong> A same-link that resolves as soon as it is derived never needed a color.</li>
-            <li><strong>A cell in two structures takes its Bank 1 color</strong>, with the group membership noted in the margin.</li>
+            <li><strong>A cell in two structures takes its Bank 1 color</strong>, with its group membership recorded in the margin instead of on the board.</li>
             <li><strong>Record what each color means when you assign it.</strong> An unlabeled color cannot be retired safely.</li>
           </ul>
         </div>
