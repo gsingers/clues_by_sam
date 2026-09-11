@@ -634,9 +634,19 @@ section[id],div[id]{scroll-margin-top:14px}
       <p class="sub">"Equal number of…" · "more … than …"</p>
       <p>Comparative clues are neither counts nor links. They constrain the <strong>difference between two neighborhoods</strong> and do not take a color. Three methods apply:</p>
       <ol class="steps">
-        <li><strong>Cancel the overlap.</strong> Shared neighbors contribute equally to both sides and drop out. If each exclusive side shrinks to one cell, "equal" becomes a same-link.</li>
-        <li><strong>Compute one side exactly and substitute a pair into the other.</strong> A neighborhood containing a differ-pair has a <em>fixed</em> contribution from that pair, which reduces the clue to a single unknown. This method applies most often.</li>
-        <li><strong>Chain the equalities.</strong> Equality is transitive, so several "equal" clues combine into one equivalence class of counts. Fixing any member fixes all of them.</li>
+        <li><strong>Cancel the overlap.</strong> Shared neighbors contribute equally to both sides and drop out. If each exclusive side shrinks to one cell, "equal" becomes a same-link.
+          <div class="ex"><u>Example</u>"Jane and Keith have equally many criminal neighbors."<br>
+Jane: {A2, B2, A4, B4, <b>B3</b>} &nbsp;·&nbsp; Keith: {A2, B2, A4, B4, <b>A3, C2, C3, C4</b>}<br>
+Four cells sit on both sides and contribute the same to each, so drop them: <b>c({B3}) = c({A3,C2,C3,C4})</b>.<br>
+One cell now bounds four. At most one of Jane, Henry, Laura and Phil is a criminal — and exactly one if Keith is.</div></li>
+        <li><strong>Compute one side exactly and substitute a pair into the other.</strong> A neighborhood containing a differ-pair has a <em>fixed</em> contribution from that pair, which reduces the clue to a single unknown. This method applies most often.
+          <div class="ex"><u>Example</u>"Vicky has more criminal neighbors than Frank" — an actual clue from the <a href="#worked-example">solve below</a>.<br>
+Vicky's neighbors are Oscar (C), Wanda (C), Phil (I), and the Ruby/Terry differ-pair, which supplies <b>exactly 1</b> either way → her count is pinned at <b>3</b>.<br>
+Frank's are Adam (I), Jane (I), Gus (C), Keith (C), plus Barb → <b>2 + Barb</b>.<br>
+Strictly greater means 3 &gt; 2 + Barb, so <b>Barb is innocent</b>. The pair was never resolved.</div></li>
+        <li><strong>Chain the equalities.</strong> Equality is transitive, so several "equal" clues combine into one equivalence class of counts. Fixing any member fixes all of them.
+          <div class="ex"><u>Example</u>Two clues from the same solve: "Barb and Nancy have an equal number of innocent neighbors", and later "Barb and Phil have an equal number of innocent neighbors".<br>
+They share Barb, so <b>Nancy, Barb and Phil carry one innocent-neighbor count between them</b>. Pin any one and the other two follow — on this board it is 2 apiece, across neighborhoods of 5, 5 and 8 cells.</div></li>
       </ol>
       <p style="margin-top:12px">Bound the smaller side as well: a comparative against a corner (3 neighbors) is far tighter than one against an interior cell (8).</p>
     </section>
