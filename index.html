@@ -625,6 +625,8 @@ section[id],div[id]{scroll-margin-top:14px}
         </table>
       </div>
       <p style="margin-top:14px"><strong>Same-links extend a chain as effectively as differ-links.</strong> Two cells forced to share a status take the <em>same</em> color.</p>
+      <p style="margin-top:12px"><strong>The overlap squeeze</strong> is the one that has to be looked for. Two groups with <em>equal</em> counts that agree on every cell but one apiece force those two odd cells to match: the shared part contributes the same amount to both totals, so whatever is left over must be equal. It rarely appears on the first read — the usual route is a group shrinking onto another as cells resolve.</p>
+      <div class="ex"><u>Example</u>"Exactly 1 of Barb's neighbors is a criminal" → <b>{A1,C1,A2,B2,C2}</b>, c = 1.<br>"Exactly 1 of Gus's neighbors is a criminal" → {A1,B1,C1,A2,C2,A3,B3,C3}, c = 1. Jane, Keith and Laura are already innocent, so the live set is <b>{A1,B1,C1,A2,C2}</b>, still c = 1.<br>Both count 1 and share A1, C1, A2, C2. The leftovers are <b>B2</b> and <b>B1</b> → <b>Gus and Barb match</b>. One color for the two of them, and neither has been resolved.</div>
     </section>
 
     <section class="p s7" id="comparatives">
