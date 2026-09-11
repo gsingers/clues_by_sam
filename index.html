@@ -65,7 +65,8 @@ body{background:var(--ground);color:var(--ink);font-family:var(--f-body);font-si
   .s4{grid-column:span 4}.s5{grid-column:span 5}.s6{grid-column:span 6}
   .s7{grid-column:span 7}.s8{grid-column:span 8}
 }
-.part{grid-column:span 12;background:var(--shade);padding:7px 20px;font-family:var(--f-mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-3)}
+.part{grid-column:span 12;background:var(--shade);padding:10px 20px;font-family:var(--f-mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-3);border-top:2px solid var(--rule-2)}
+.part b{color:var(--ink);font-weight:600}
 .p h2{font-family:var(--f-display);font-weight:700;font-size:1.06rem;letter-spacing:-.01em;margin:0 0 2px;text-wrap:balance}
 .p .sub{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin:0 0 12px}
 .p p{margin:0 0 10px;color:var(--ink-2)}
@@ -202,9 +203,10 @@ figcaption b{color:var(--ink-2);font-weight:600}
 /* ---------- contents ---------- */
 .toc{border:1px solid var(--rule);background:var(--panel);padding:16px 20px 18px;margin-bottom:22px;display:grid;gap:20px}
 @media(min-width:860px){.toc{grid-template-columns:1fr 2.3fr 1fr;gap:28px}}
-.toc h2{font-family:var(--f-mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-3);font-weight:500;margin:0 0 10px;padding-bottom:7px;border-bottom:1px solid var(--rule)}
-.toc h2 a{color:inherit;text-decoration:none}
-.toc h2 a:hover{color:var(--ink)}
+.toc-title{grid-column:1/-1;font-family:var(--f-display);font-weight:700;font-size:1.06rem;letter-spacing:-.01em;color:var(--ink);margin:0;padding-bottom:10px;border-bottom:2px solid var(--ink)}
+.toc h3{font-family:var(--f-mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-3);font-weight:500;margin:0 0 10px;padding-bottom:7px;border-bottom:1px solid var(--rule)}
+.toc h3 a,.toc .grp a{color:inherit;text-decoration:none;border-bottom:0}
+.toc h3 a:hover,.toc .grp a:hover{color:var(--ink)}
 .toc ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
 .toc li{font-size:.93rem;line-height:1.3}
 .toc a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid transparent}
@@ -213,7 +215,6 @@ figcaption b{color:var(--ink-2);font-weight:600}
 @media(min-width:600px){.toccols{grid-template-columns:1fr 1fr;gap:16px 24px}}
 .toc .grp{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 6px}
 section[id],div[id]{scroll-margin-top:14px}
-.part b{color:var(--ink-2);font-weight:600}
 
 /* ---------- notation ---------- */
 .sym{font-family:var(--f-mono);font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap}
@@ -252,9 +253,10 @@ section[id],div[id]{scroll-margin-top:14px}
     </div>
   </header>
 
-  <nav class="toc" aria-label="Contents">
+  <nav class="toc" aria-labelledby="toc-title">
+    <h2 class="toc-title" id="toc-title">Table of Contents</h2>
     <div>
-      <h2><a href="#part-basics">Basics</a></h2>
+      <h3><a href="#part-basics">Basics</a></h3>
       <ul>
         <li><a href="#premise">The premise</a></li>
         <li><a href="#vocabulary">Vocabulary, and where it bites</a></li>
@@ -263,15 +265,15 @@ section[id],div[id]{scroll-margin-top:14px}
       </ul>
     </div>
     <div>
-      <h2><a href="#part-connectivity">Advanced</a></h2>
+      <h3><a href="#part-connectivity">Advanced</a></h3>
       <div class="toccols">
         <div>
-          <p class="grp">Connectivity</p>
+          <p class="grp"><a href="#part-connectivity">Connectivity</a></p>
           <ul>
             <li><a href="#connectivity">The connectivity toolkit</a></li>
             <li><a href="#connector-cost">Connector cost</a></li>
           </ul>
-          <p class="grp" style="margin-top:14px">Tagging</p>
+          <p class="grp" style="margin-top:14px"><a href="#part-tagging">Tagging</a></p>
           <ul>
             <li><a href="#banks">Three banks</a></li>
             <li><a href="#links">What makes a link</a></li>
@@ -283,7 +285,7 @@ section[id],div[id]{scroll-margin-top:14px}
           </ul>
         </div>
         <div>
-          <p class="grp">Notation</p>
+          <p class="grp"><a href="#part-notation">Notation</a></p>
           <ul>
             <li><a href="#notation-structure">The board as a structure</a></li>
             <li><a href="#notation-pairs">Pairs are equations</a></li>
@@ -292,7 +294,7 @@ section[id],div[id]{scroll-margin-top:14px}
             <li><a href="#contradiction">Contradiction and discharge</a></li>
             <li><a href="#notation-hygiene">Notation hygiene</a></li>
           </ul>
-          <p class="grp" style="margin-top:14px">Procedure</p>
+          <p class="grp" style="margin-top:14px"><a href="#part-procedure">Procedure</a></p>
           <ul>
             <li><a href="#counting">Counting, done fully</a></li>
             <li><a href="#case-analysis">Case analysis</a></li>
@@ -302,7 +304,7 @@ section[id],div[id]{scroll-margin-top:14px}
       </div>
     </div>
     <div>
-      <h2><a href="#part-example">Example</a></h2>
+      <h3><a href="#part-example">Example</a></h3>
       <ul>
         <li><a href="#worked-example">A complete solve, tag by tag</a></li>
         <li><a href="#takeaways">What this board taught</a></li>
