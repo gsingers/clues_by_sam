@@ -120,6 +120,11 @@ figcaption b{color:var(--ink-2);font-weight:600}
 .p a{color:var(--inno);text-decoration:none;border-bottom:1px solid var(--rule-2)}
 .p a:hover{color:var(--ink);border-bottom-color:var(--ink)}
 
+.ex{font-family:var(--f-mono);font-size:10.5px;line-height:1.6;color:var(--ink-2);background:var(--panel-2);border-left:2px solid var(--rule-2);padding:7px 10px;margin-top:9px}
+.p--alt .ex{background:var(--panel)}
+.ex b{color:var(--ink);font-weight:600}
+.ex u{display:block;text-decoration:none;color:var(--ink-3);font-size:9px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:3px}
+
 .scroll{overflow-x:auto}
 .t{width:100%;border-collapse:collapse;font-size:.9rem;min-width:340px}
 .t th{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:0 10px 6px 0;border-bottom:1px solid var(--rule-2);font-weight:500}
@@ -469,7 +474,7 @@ section[id],div[id]{scroll-margin-top:14px}
       </div>
       <ul class="rules" style="margin-top:16px">
         <li><strong>Connectivity along a single line is an ordering constraint, not a count.</strong> It converts to implications: if the third cell is innocent, every cell past it is innocent. Combine that with any count clue covering the same cells.</li>
-        <li><strong>Elbow constraints are "at least one", not "exactly one".</strong> They do not produce a link, so they stay out of Bank 1.</li>
+        <li><strong>Elbow constraints are "at least one", not "exactly one".</strong> Knowing that at least one of two cells is criminal fixes no relation between them, so the pair cannot later be recorded as a <a href="#links">link</a>.</li>
         <li>A <em>not connected</em> clue asserts that a separating line of innocents exists. The board is 4 cells wide, so such walls are short.</li>
         <li><strong>Distance sets a lower bound on headcount.</strong> Connecting two cells requires at least <span class="co">|Δrow| + |Δcol| + 1</span> cells of that status.</li>
       </ul>
@@ -514,7 +519,9 @@ section[id],div[id]{scroll-margin-top:14px}
     <section class="p s7" id="banks">
       <h2>Three banks</h2>
       <p class="sub">Assigning the three tag colors</p>
-      <p>The board records placements. Tags record derived structure that cannot yet be placed. The palette is small, so give each color a single assigned role and never let two meanings share a color.</p>
+      <p>Each card holds a colored tag on its corner, cycled by tapping it. The board itself already records every placement, so a tag is worth spending only on <strong>a relation you have proved but cannot yet resolve</strong> — two cells that must differ, a group known to contain exactly one criminal, a cell being tested by assumption.</p>
+      <p>The palette is the constraint. Three colors are available by tap, and a meaning has to stay attached to its color for as long as the structure lives, so the colors are best treated as three assigned registers rather than free highlighting. The three <em>banks</em> below are those registers, listed in the order they should claim a color when the palette is tight.</p>
+      <p style="margin-bottom:14px">One word of warning about that term: <strong>bank</strong> also names each half of a chain — the set of cells that turn out to be criminal, and the set that turn out to be innocent. Bank 1 holds that structure and needs two colors for it; Banks 2 and 3 are single-color roles.</p>
       <div class="banks">
         <div class="bank">
           <div class="chips"><span class="chip a"></span><span class="chip b"></span></div>
@@ -522,6 +529,7 @@ section[id],div[id]{scroll-margin-top:14px}
             <div class="role">Bank 1 · standing</div>
             <h3>The chain</h3>
             <p>Cells joined by <em>same</em>- and <em>differ</em>-links. However many cells it holds, a chain always has exactly <strong>two banks — so exactly two colors.</strong> Either color 1 is the criminal set and color 2 the innocent set, or the reverse.</p>
+            <div class="ex"><u>Example</u>"Exactly 1 of Frank and Nancy is a criminal" → <b>A2 ⊕ A4</b>. Tag A2 color 1, A4 color 2.<br>A later parity clue forces Nancy and Oscar to match → B4 takes <b>color 2</b>, beside Nancy.<br>Three cells, one chain, still two colors. Placing any one of them resolves all three.</div>
           </div>
         </div>
         <div class="bank">
@@ -530,6 +538,7 @@ section[id],div[id]{scroll-margin-top:14px}
             <div class="role">Bank 2 · transient</div>
             <h3>Group colors</h3>
             <p>One color marks one exclusivity group with a known count. Overlapping groups are the reason to spend a color: containment, arithmetic remainder, and overlap squeeze are hard to see in clue text and immediate in color. Retire the color as soon as the group resolves.</p>
+            <div class="ex"><u>Example</u>"Exactly 1 singer is a criminal" — Maria, Oscar, Terry → tag D3, B4, B5 color 3.<br>Margin: <b>●3 = {D3,B4,B5}, c = 1</b>.<br>Oscar is later placed criminal, which fills the quota: <b>D3 and B5 are innocent</b>, and color 3 is free again.</div>
           </div>
         </div>
         <div class="bank">
@@ -538,6 +547,7 @@ section[id],div[id]{scroll-margin-top:14px}
             <div class="role">Bank 3 · scratch</div>
             <h3>Hypotheses only</h3>
             <p>One color, always the same one, cleared completely before normal play resumes. A speculative mark left among the standing banks invalidates every later deduction, and the resulting error is hard to locate.</p>
+            <div class="ex"><u>Example</u>Assume Chad is a criminal. Mark C1 and everything it forces in the scratch color only.<br>If that forces two criminals into a line capped at one → <b>⊥</b>, so <b>Chad is innocent</b>: place it.<br>Either way — contradiction or not — clear every scratch mark before the next deduction.</div>
           </div>
         </div>
       </div>
