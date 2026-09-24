@@ -57,6 +57,12 @@ body{background:var(--ground);color:var(--ink);font-family:var(--f-body);font-si
 .ladder i{font-style:normal;color:var(--ink-3)}
 .tier{color:var(--ink-2)}
 .toc .new{font-family:var(--f-mono);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--inno);margin-left:4px}
+.fold{grid-column:span 12;display:block}
+.fold>summary{list-style:none;cursor:pointer}
+.fold>summary::-webkit-details-marker{display:none}
+.fold>summary .lvl::after{content:" · show ▾"}
+.fold[open]>summary .lvl::after{content:" · hide ▴"}
+.subsheet{display:grid;grid-template-columns:repeat(12,1fr);gap:1px;background:var(--rule);border-top:1px solid var(--rule)}
 .part .lvl{float:right;font-family:var(--f-mono);font-size:10.5px;font-weight:400;letter-spacing:.1em;color:var(--ink-3)}
 .tier.t4{color:var(--ink)}
 .tier.t5{color:var(--crim)}
@@ -297,8 +303,14 @@ section[id],div[id]{scroll-margin-top:14px}
         <li><a href="#vocabulary">Vocabulary and exact definitions</a></li>
         <li><a href="#graphs">Two graphs, one board</a></li>
         <li><a href="#geometry">Board geometry</a></li>
+        <li><a href="#groups">Shrink every clue to cells</a></li>
         <li><a href="#compound">Compound clues</a></li>
         <li><a href="#line-clues">Line and board totals</a></li>
+      </ul>
+      <h3 style="margin-top:14px"><a href="#part-pairs">Intermediate</a></h3>
+      <ul>
+        <li><a href="#pairs">Branch-independent contribution</a></li>
+        <li><a href="#comparatives">Comparative clues</a></li>
       </ul>
     </div>
     <div>
@@ -314,15 +326,11 @@ section[id],div[id]{scroll-margin-top:14px}
           <ul>
             <li><a href="#banks">Three banks</a></li>
             <li><a href="#links">What makes a link</a></li>
-            <li><a href="#comparatives">Comparative clues</a></li>
-            <li><a href="#pairs">Branch-independent contribution</a></li>
-            <li><a href="#groups">Before assigning a color</a></li>
-            <li><a href="#chain-pays">Applying a chain</a></li>
-            <li><a href="#tag-hygiene">Tag hygiene</a></li>
+            <li><a href="#chain-pays">Applying and retiring a chain</a></li>
           </ul>
         </div>
         <div>
-          <p class="grp"><a href="#part-notation">Notation</a></p>
+          <p class="grp"><a href="#part-notation">Notation</a> <span class="new">optional</span></p>
           <ul>
             <li><a href="#notation-structure">The board as a structure</a></li>
             <li><a href="#notation-pairs">Pairs are equations</a></li>
@@ -368,13 +376,13 @@ section[id],div[id]{scroll-margin-top:14px}
       <p>Most of this manual exists for Hard days and up. Through Tricky, a short loop does nearly all the work. Run it on each clue as it appears:</p>
       <ol class="steps">
         <li><strong>Read the newest clue first.</strong> Each placement reveals a clue, and on Easy to Medium that clue usually forces the next placement. Look there before rescanning the board.</li>
-        <li><strong>Shrink the clue to cells.</strong> Intersect every set it names: a neighborhood with a line, with the edges, or with another neighborhood. Drop anyone the relation is undefined for. What is left is usually two or three cells, often fully forced.</li>
+        <li><strong><a href="#groups">Shrink the clue to cells.</a></strong> Intersect every set it names: a neighborhood with a line, with the edges, or with another neighborhood. Drop anyone the relation is undefined for. What is left is usually two or three cells, often fully forced.</li>
         <li><strong>Harvest every number.</strong> "2 of the 6 criminals neighboring Freya are…" is two clues: Freya has 6 criminal neighbors, and 2 of them sit in the named set. The embedded total is the one players forget. See <a href="#compound">Compound clues</a>.</li>
         <li><strong>Keep a list of pairs.</strong> Any "exactly one of these two" is a <a href="#pairs">pair</a> that supplies exactly one criminal to every later clue containing both cells. Subtract it straight away; don't wait to resolve it.</li>
         <li><strong>Re-scan the whole-line clues after every placement.</strong> Row, column and edge totals ("each row has at least 2 criminals", "only one column has exactly 4") fire on the last unknown in a line, long after they were revealed. See <a href="#line-clues">Line and board totals</a>.</li>
         <li><strong>Stuck? Work <a href="#stuck">the stall list</a>.</strong> Case analysis comes last.</li>
       </ol>
-      <p style="margin-top:14px"><strong>What to read by difficulty.</strong> Easy and Medium: this loop, the <a href="#part-basics">Basics</a>, and <a href="#pairs">branch-independent pairs</a>. Tricky: add <a href="#comparatives">comparatives</a> and <a href="#notation-pairs">composing links</a> (two differ-links make a same-link). Hard and up: connectivity, the tag banks, the ledger and case analysis. In a <a href="#field-test">four-day field test</a>, Easy through Tricky needed nothing beyond the Tricky list.</p>
+      <p style="margin-top:14px"><strong>What to read by difficulty.</strong> Easy and Medium: this loop and the <a href="#part-basics">Basics</a>. Tricky: add the <a href="#part-pairs">Intermediate</a> part, pairs and comparatives. Hard and up: the Advanced parts, meaning connectivity, the tag banks, the ledger (folded away by default) and case analysis. In a <a href="#field-test">four-day field test</a>, Easy through Tricky needed nothing beyond the Tricky list.</p>
     </section>
 
     <div class="part" id="part-basics"><b>Basics</b> <i>/</i> Rules &amp; geometry</div>
@@ -520,6 +528,45 @@ section[id],div[id]{scroll-margin-top:14px}
       </div>
     </section>
 
+    <section class="p p--alt" id="groups">
+      <h2>Shrink every clue to cells</h2>
+      <p class="sub">Translate · prune · quota</p>
+      <ol class="flow">
+        <li>
+          <span class="n">01</span>
+          <div>
+            <h3>Translate the property into cells</h3>
+            <p>"Exactly one <em>X</em> has a criminal directly above them" names a category, but the constrained cells are elsewhere. Rewrite it as <strong>"exactly one criminal among {the cell directly above each X}"</strong>. Count those cells, not the category members.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">02</span>
+          <div>
+            <h3>Prune undefined members</h3>
+            <p>Drop anyone for whom the relation is undefined: nobody in row 1 has a cell above them, nobody in row 5 has one below, nobody in column A has one to the left and nobody in column D has one to the right. Undefined members mis-size the group and corrupt the count.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">03</span>
+          <div>
+            <h3>Check the quota</h3>
+            <p>Split into resolved and unresolved, and count what the resolved part already supplies. Only one of the three outcomes below needs tracking.</p>
+          </div>
+        </li>
+      </ol>
+      <div class="scroll" style="margin-top:14px">
+        <table class="t">
+          <thead><tr><th>Quota status</th><th>What it means</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td class="k">already filled</td><td>every remaining member is innocent</td><td><span class="go">place — don't tag</span></td></tr>
+            <tr><td class="k">count == cells left</td><td>every remaining cell is criminal</td><td><span class="go">place — don't tag</span></td></tr>
+            <tr><td class="k">anything between</td><td>a live group</td><td>track it; from Hard, <a href="#banks">tag it</a> (Bank 2)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:12px"><strong>A satisfied group is not a tracking problem but a set of placements. Collect them before moving on.</strong></p>
+    </section>
+
     <section class="p" id="compound">
       <h2>Compound clues</h2>
       <p class="sub">One sentence, two or three constraints</p>
@@ -553,6 +600,44 @@ section[id],div[id]{scroll-margin-top:14px}
         <li><strong>Edge totals are endgame tools.</strong> Count what is already fixed among the 14 edge cells. With a few cells left, the total usually narrows them to a two-way split that another clue settles.</li>
         <li><strong>Groups inside a line.</strong> Subtract a group's known count from the line total and the rest of the line is often determined: column A needing at least 3 criminals, with exactly one among A1–A3 and A4 criminal, forces A5.</li>
       </ul>
+    </section>
+
+    <div class="part" id="part-pairs"><b>Intermediate</b> <i>/</i> Pairs &amp; comparatives <span class="lvl">Medium · Tricky</span></div>
+
+    <section class="p p--alt s5" id="pairs">
+      <h2>Branch-independent contribution</h2>
+      <p class="sub">Using a pair before it resolves</p>
+      <p>A differ-pair contributes <strong>exactly one criminal and exactly one innocent, in both worlds.</strong> A same-pair contributes <strong>zero or two — always even.</strong> Neither needs resolving to be used.</p>
+      <p>When a pair lies inside a clue's set, subtract its guaranteed contribution and apply the clue to the remainder:</p>
+      <ul class="rules">
+        <li><strong>Parity clues</strong> — a differ-pair flips the required parity of the remainder; a same-pair leaves it untouched.</li>
+        <li><strong>Comparative clues</strong> — a pair fixes one side's count outright, leaving a single unknown.</li>
+        <li><strong>Exact counts</strong> — a pair consumes exactly one of the quota.</li>
+      </ul>
+      <p style="margin-top:14px"><strong>Pairs compose.</strong> Two differ-pairs that share a cell make their other two cells match: x ⊕ y and y ⊕ z give x ≡ z. Thursday's endgame turned on exactly this. Which clues create a pair is listed under <a href="#links">What makes a link</a>.</p>
+      <p style="margin-top:10px"><strong>A pair is useful while unresolved.</strong> Resolving it is not a prerequisite, so apply pairs to live clues as soon as they exist.</p>
+    </section>
+
+    <section class="p s7" id="comparatives">
+      <h2>Comparative clues</h2>
+      <p class="sub">"Equal number of…" · "more … than …"</p>
+      <p>Comparative clues are neither counts nor links. They constrain the <strong>difference between two neighborhoods</strong> and do not take a color. Three methods apply:</p>
+      <ol class="steps">
+        <li><strong>Cancel the overlap.</strong> Shared neighbors contribute equally to both sides and drop out. If each exclusive side shrinks to one cell, "equal" becomes a same-link.
+          <div class="ex"><u>Example</u>"Jane and Keith have equally many criminal neighbors."<br>
+Jane: {A2, B2, A4, B4, <b>B3</b>} &nbsp;·&nbsp; Keith: {A2, B2, A4, B4, <b>A3, C2, C3, C4</b>}<br>
+Four cells sit on both sides and contribute the same to each, so drop them: <b>c({B3}) = c({A3,C2,C3,C4})</b>.<br>
+One cell now bounds four. At most one of Jane, Henry, Laura and Phil is a criminal — and exactly one if Keith is.</div></li>
+        <li><strong>Compute one side exactly and substitute a pair into the other.</strong> A neighborhood containing a differ-pair has a <em>fixed</em> contribution from that pair, which reduces the clue to a single unknown. This method applies most often.
+          <div class="ex"><u>Example</u>"Vicky has more criminal neighbors than Frank" — an actual clue from the <a href="#worked-example">solve below</a>.<br>
+Vicky's neighbors are Oscar (C), Wanda (C), Phil (I), and the Ruby/Terry differ-pair, which supplies <b>exactly 1</b> either way → her count is pinned at <b>3</b>.<br>
+Frank's are Adam (I), Jane (I), Gus (C), Keith (C), plus Barb → <b>2 + Barb</b>.<br>
+Strictly greater means 3 &gt; 2 + Barb, so <b>Barb is innocent</b>. The pair was never resolved.</div></li>
+        <li><strong>Chain the equalities.</strong> Equality is transitive, so several "equal" clues combine into one equivalence class of counts. Fixing any member fixes all of them.
+          <div class="ex"><u>Example</u>Two clues from the same solve: "Barb and Nancy have an equal number of innocent neighbors", and later "Barb and Phil have an equal number of innocent neighbors".<br>
+They share Barb, so <b>Nancy, Barb and Phil carry one innocent-neighbor count between them</b>. Pin any one and the other two follow — on this board it is 2 apiece, across neighborhoods of 5, 5 and 8 cells.</div></li>
+      </ol>
+      <p style="margin-top:12px">Bound the smaller side as well: a comparative against a corner (3 neighbors) is far tighter than one against an interior cell (8).</p>
     </section>
 
     <div class="part" id="part-connectivity"><b>Advanced</b> <i>/</i> Connectivity <span class="lvl">mostly Hard +</span></div>
@@ -633,7 +718,7 @@ section[id],div[id]{scroll-margin-top:14px}
       <p style="margin-top:12px;font-size:.9rem">Select any two cells. If the remaining criminal count is below this floor, the connection is impossible and whatever assumption requires it is contradicted.</p>
     </section>
 
-    <div class="part" id="part-tagging"><b>Advanced</b> <i>/</i> The tagging system <span class="lvl">pairs from Tricky · the rest Hard +</span></div>
+    <div class="part" id="part-tagging"><b>Advanced</b> <i>/</i> The tagging system <span class="lvl">Hard +</span></div>
 
     <section class="p s7" id="banks">
       <h2>Three banks</h2>
@@ -695,104 +780,19 @@ section[id],div[id]{scroll-margin-top:14px}
       <div class="ex"><u>Example</u>"Exactly 1 of Barb's neighbors is a criminal" → <b>{A1,C1,A2,B2,C2}</b>, c = 1.<br>"Exactly 1 of Gus's neighbors is a criminal" → {A1,B1,C1,A2,C2,A3,B3,C3}, c = 1. Jane, Keith and Laura are already innocent, so the live set is <b>{A1,B1,C1,A2,C2}</b>, still c = 1.<br>Both count 1 and share A1, C1, A2, C2. The leftovers are <b>B2</b> and <b>B1</b> → <b>Gus and Barb match</b>. One color for the two of them, and neither has been resolved.</div>
     </section>
 
-    <section class="p s7" id="comparatives">
-      <h2>Comparative clues</h2>
-      <p class="sub">"Equal number of…" · "more … than …"</p>
-      <p>Comparative clues are neither counts nor links. They constrain the <strong>difference between two neighborhoods</strong> and do not take a color. Three methods apply:</p>
-      <ol class="steps">
-        <li><strong>Cancel the overlap.</strong> Shared neighbors contribute equally to both sides and drop out. If each exclusive side shrinks to one cell, "equal" becomes a same-link.
-          <div class="ex"><u>Example</u>"Jane and Keith have equally many criminal neighbors."<br>
-Jane: {A2, B2, A4, B4, <b>B3</b>} &nbsp;·&nbsp; Keith: {A2, B2, A4, B4, <b>A3, C2, C3, C4</b>}<br>
-Four cells sit on both sides and contribute the same to each, so drop them: <b>c({B3}) = c({A3,C2,C3,C4})</b>.<br>
-One cell now bounds four. At most one of Jane, Henry, Laura and Phil is a criminal — and exactly one if Keith is.</div></li>
-        <li><strong>Compute one side exactly and substitute a pair into the other.</strong> A neighborhood containing a differ-pair has a <em>fixed</em> contribution from that pair, which reduces the clue to a single unknown. This method applies most often.
-          <div class="ex"><u>Example</u>"Vicky has more criminal neighbors than Frank" — an actual clue from the <a href="#worked-example">solve below</a>.<br>
-Vicky's neighbors are Oscar (C), Wanda (C), Phil (I), and the Ruby/Terry differ-pair, which supplies <b>exactly 1</b> either way → her count is pinned at <b>3</b>.<br>
-Frank's are Adam (I), Jane (I), Gus (C), Keith (C), plus Barb → <b>2 + Barb</b>.<br>
-Strictly greater means 3 &gt; 2 + Barb, so <b>Barb is innocent</b>. The pair was never resolved.</div></li>
-        <li><strong>Chain the equalities.</strong> Equality is transitive, so several "equal" clues combine into one equivalence class of counts. Fixing any member fixes all of them.
-          <div class="ex"><u>Example</u>Two clues from the same solve: "Barb and Nancy have an equal number of innocent neighbors", and later "Barb and Phil have an equal number of innocent neighbors".<br>
-They share Barb, so <b>Nancy, Barb and Phil carry one innocent-neighbor count between them</b>. Pin any one and the other two follow — on this board it is 2 apiece, across neighborhoods of 5, 5 and 8 cells.</div></li>
-      </ol>
-      <p style="margin-top:12px">Bound the smaller side as well: a comparative against a corner (3 neighbors) is far tighter than one against an interior cell (8).</p>
-    </section>
-
-    <section class="p p--alt s5" id="pairs">
-      <h2>Branch-independent contribution</h2>
-      <p class="sub">Using a pair before it resolves</p>
-      <p>A differ-pair contributes <strong>exactly one criminal and exactly one innocent, in both worlds.</strong> A same-pair contributes <strong>zero or two — always even.</strong> Neither needs resolving to be used.</p>
-      <p>When a pair lies inside a clue's set, subtract its guaranteed contribution and apply the clue to the remainder:</p>
-      <ul class="rules">
-        <li><strong>Parity clues</strong> — a differ-pair flips the required parity of the remainder; a same-pair leaves it untouched.</li>
-        <li><strong>Comparative clues</strong> — a pair fixes one side's count outright, leaving a single unknown.</li>
-        <li><strong>Exact counts</strong> — a pair consumes exactly one of the quota.</li>
-      </ul>
-      <p style="margin-top:14px"><strong>A pair is useful while unresolved.</strong> Resolving it is not a prerequisite, so apply pairs to live clues as soon as they exist.</p>
-    </section>
-
-    <section class="p s7" id="groups">
-      <h2>Before assigning a color</h2>
-      <p class="sub">Translate · prune · quota</p>
-      <ol class="flow">
-        <li>
-          <span class="n">01</span>
-          <div>
-            <h3>Translate the property into cells</h3>
-            <p>"Exactly one <em>X</em> has a criminal directly above them" names a category, but the constrained cells are elsewhere. Rewrite it as <strong>"exactly one criminal among {the cell directly above each X}"</strong>. Tag those cells, not the category members.</p>
-          </div>
-        </li>
-        <li>
-          <span class="n">02</span>
-          <div>
-            <h3>Prune undefined members</h3>
-            <p>Drop anyone for whom the relation is undefined: nobody in row 1 has a cell above them, nobody in row 5 has one below, nobody in column A has one to the left and nobody in column D has one to the right. Undefined members mis-size the group and corrupt the count.</p>
-          </div>
-        </li>
-        <li>
-          <span class="n">03</span>
-          <div>
-            <h3>Check the quota</h3>
-            <p>Split into resolved and unresolved, and count what the resolved part already supplies. Only one of the three outcomes below needs a color.</p>
-          </div>
-        </li>
-      </ol>
-      <div class="scroll" style="margin-top:14px">
-        <table class="t">
-          <thead><tr><th>Quota status</th><th>What it means</th><th>Action</th></tr></thead>
-          <tbody>
-            <tr><td class="k">already filled</td><td>every remaining member is innocent</td><td><span class="go">place — don't tag</span></td></tr>
-            <tr><td class="k">count == cells left</td><td>every remaining cell is criminal</td><td><span class="go">place — don't tag</span></td></tr>
-            <tr><td class="k">anything between</td><td>a live group</td><td>tag it — Bank 2</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="margin-top:12px"><strong>A satisfied group is not a tracking problem but a set of placements. Collect them before moving on.</strong></p>
-    </section>
-
-    <section class="p p--alt s5" id="chain-pays">
-      <h2>Applying a chain</h2>
+    <section class="p p--alt" id="chain-pays">
+      <span id="tag-hygiene"></span>
+      <h2>Applying and retiring a chain</h2>
       <p class="sub">Check these after every placement</p>
-      <ul class="rules">
+      <div class="figrow" style="gap:26px">
+        <div style="flex:1 1 300px;min-width:260px">
+          <ul class="rules">
         <li><strong>Resolve one, resolve all.</strong> Prove any single tagged cell and the whole chain collapses in one pass.</li>
         <li><strong>A bank that cannot supply the count → contradiction.</strong> If a clue requires one criminal from a set holding two same-colored cells, that assignment is impossible and the other color is the criminal bank.</li>
         <li><strong>Count collision.</strong> A line known to hold zero criminals containing a color-1 cell makes color 1 the innocent bank everywhere.</li>
         <li><strong>Forced to differ, same color</strong> (or forced to match, opposite colors) → that assignment is impossible. No case analysis required.</li>
       </ul>
-      <p style="margin-top:14px">Without tags, a stall requires re-deriving the board. With tags, it begins with <strong>the colored cells</strong>.</p>
-    </section>
-
-    <section class="p" id="tag-hygiene">
-      <h2>Tag hygiene</h2>
-      <p class="sub">Retiring and reusing colors</p>
-      <div class="figrow" style="gap:26px">
-        <div style="flex:1 1 300px;min-width:260px">
-          <ul class="rules warn">
-            <li><strong>Colors count banks, not cells.</strong> Three colors on three chained cells discards the structure the chain encodes. Merge them to two.</li>
-            <li><strong>Don't tag what a line already shows.</strong> A count over a whole row or column needs no color. Colors are for scattered constraints.</li>
-            <li><strong>Do not tag a link that resolves immediately.</strong> A same-link that resolves as soon as it is derived never needed a color.</li>
-            <li><strong>A cell in two structures takes its Bank 1 color</strong>, with its group membership recorded in the margin instead of on the board.</li>
-            <li><strong>Record what each color means when you assign it.</strong> An unlabeled color cannot be retired safely.</li>
-          </ul>
+          <p style="margin-top:14px">Without tags, a stall requires re-deriving the board. With tags, it begins with <strong>the colored cells</strong>.</p>
         </div>
         <div style="flex:1 1 300px;min-width:260px">
           <p style="margin-bottom:12px"><strong>The life cycle.</strong> Groups shrink into pairs, pairs combine into a chain, and the chain collapses on a single placement. Retire a color at each step; stale tags are a common source of late-puzzle errors.</p>
@@ -806,9 +806,19 @@ They share Barb, so <b>Nancy, Barb and Phil carry one innocent-neighbor count be
           <p style="margin-top:12px;font-size:.9rem">Step 4 is the one most often skipped.</p>
         </div>
       </div>
+      <p style="margin:16px 0 8px"><strong>Hygiene.</strong></p>
+      <ul class="rules warn">
+            <li><strong>Colors count banks, not cells.</strong> Three colors on three chained cells discards the structure the chain encodes. Merge them to two.</li>
+            <li><strong>Don't tag what a line already shows.</strong> A count over a whole row or column needs no color. Colors are for scattered constraints.</li>
+            <li><strong>Do not tag a link that resolves immediately.</strong> A same-link that resolves as soon as it is derived never needed a color.</li>
+            <li><strong>A cell in two structures takes its Bank 1 color</strong>, with its group membership recorded in the margin instead of on the board.</li>
+            <li><strong>Record what each color means when you assign it.</strong> An unlabeled color cannot be retired safely.</li>
+          </ul>
     </section>
 
-    <div class="part" id="part-notation"><b>Advanced</b> <i>/</i> Notation &amp; the paper ledger <span class="lvl">optional · Hard +</span></div>
+    <details class="fold" id="part-notation">
+      <summary class="part"><b>Advanced</b> <i>/</i> Notation &amp; the paper ledger <span class="lvl">optional · Hard +</span></summary>
+      <div class="subsheet">
 
     <section class="p s7" id="notation-structure">
       <h2>The board as a structure</h2>
@@ -940,6 +950,8 @@ They share Barb, so <b>Nancy, Barb and Phil carry one innocent-neighbor count be
         </div>
       </div>
     </section>
+      </div>
+    </details>
 
     <div class="part" id="part-procedure"><b>Advanced</b> <i>/</i> Procedure</div>
 
@@ -1075,6 +1087,18 @@ They share Barb, so <b>Nancy, Barb and Phil carry one innocent-neighbor count be
 </div>
 
 <script>
+(function(){
+  function openFor(hash){
+    if(!hash||hash.length<2) return;
+    var el=document.getElementById(decodeURIComponent(hash.slice(1)));
+    if(!el) return;
+    var d=el.closest('details');
+    if(d&&!d.open){ d.open=true; el.scrollIntoView(); }
+  }
+  window.addEventListener('hashchange',function(){ openFor(location.hash); });
+  document.addEventListener('DOMContentLoaded',function(){ openFor(location.hash); });
+})();
+
 (function(){
   var grid=document.getElementById('calcGrid');
   var out=document.getElementById('readout');

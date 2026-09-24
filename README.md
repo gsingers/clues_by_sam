@@ -9,15 +9,24 @@ reading any one of them.
 
 ## What's in it
 
+- **The daily loop** — six habits that carry Easy through Tricky, and a map of which sections matter
+  at which difficulty.
 - **Basics** — the exact in-game meanings of *neighbors*, *connected*, *directly above*, *edges*,
-  *in between*, *all* vs *any*, and the parity clues; board geometry and neighbor counts by position.
-- **Advanced** — connectivity rules and connector cost; the three-bank tagging system, with links,
-  groups, comparatives and branch-independent pairs; a set- and graph-theory notation for keeping
-  a paper ledger alongside the app; and the procedure to run when a board stalls.
+  *in between*, *all* vs *any*, and the parity clues; board geometry and neighbor counts by
+  position; shrinking a clue to cells; compound clues ("k of the N criminals neighboring X…") and
+  whole-line totals.
+- **Intermediate** — branch-independent pairs and comparative clues, the Tricky-day toolkit.
+- **Advanced** — connectivity rules and connector cost; the three-bank tagging system with links
+  and chains; an optional set- and graph-theory notation for a paper ledger (folded by default);
+  and the procedure to run when a board stalls.
 - **Worked example** — the daily of 9 September 2026 solved in full, twenty placements, each one
   accepted by the game on the first attempt.
 
-Every example in the manual uses that same board, so the cast is shared throughout.
+- **Field test** — the Monday–Thursday dailies of 21–24 September 2026, played with the manual
+  at hand, and which techniques each one needed. The step-by-step logs are in [`field-test/`](field-test/).
+
+Most examples use the 9 September board, so the cast is shared; the compound-clue and line-total
+examples come from the field-test boards.
 
 ## How it's built
 
