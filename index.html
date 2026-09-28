@@ -353,7 +353,7 @@ section[id],div[id]{scroll-margin-top:14px}
       <ul>
         <li><a href="#worked-example">A complete solve, tag by tag</a></li>
         <li><a href="#takeaways">Results from this board</a></li>
-        <li><a href="#field-test">Field test: four dailies</a></li>
+        <li><a href="#field-test">Field test: five dailies</a></li>
       </ul>
       <p class="grp" style="margin-top:14px"><a href="#part-references">Reference</a></p>
       <ul>
@@ -382,7 +382,7 @@ section[id],div[id]{scroll-margin-top:14px}
         <li><strong>Re-scan the whole-line clues after every placement.</strong> Row, column and edge totals ("each row has at least 2 criminals", "only one column has exactly 4") fire on the last unknown in a line, long after they were revealed. See <a href="#line-clues">Line and board totals</a>.</li>
         <li><strong>Stuck? Work <a href="#stuck">the stall list</a>.</strong> Case analysis comes last.</li>
       </ol>
-      <p style="margin-top:14px"><strong>What to read by difficulty.</strong> Easy and Medium: this loop and the <a href="#part-basics">Basics</a>. Tricky: add the <a href="#part-pairs">Intermediate</a> part, pairs and comparatives. Hard and up: the Advanced parts, meaning connectivity, the tag banks, the ledger (folded away by default) and case analysis. In a <a href="#field-test">four-day field test</a>, Easy through Tricky needed nothing beyond the Tricky list.</p>
+      <p style="margin-top:14px"><strong>What to read by difficulty.</strong> Easy and Medium: this loop and the <a href="#part-basics">Basics</a>. Tricky: add the <a href="#part-pairs">Intermediate</a> part, pairs and comparatives. Hard and up: the Advanced parts, meaning connectivity, the tag banks, the ledger (folded away by default) and case analysis. In a <a href="#field-test">five-board field test</a>, Easy through Tricky needed nothing beyond the Tricky list, and the Brutal board needed only one chain of pairs on top.</p>
     </section>
 
     <div class="part" id="part-basics"><b>Basics</b> <i>/</i> Rules &amp; geometry</div>
@@ -394,7 +394,7 @@ section[id],div[id]{scroll-margin-top:14px}
         <div class="term"><dt>neighbors</dt><dd>All 8 surrounding cells, diagonals included.</dd></div>
         <div class="term">
           <dt>connected</dt>
-          <dd>A chain of <strong>orthogonal</strong> adjacency. Along a single row or column it means <em>no innocents between any two criminals in that line</em>. A group of one counts as connected.</dd>
+          <dd>A chain of <strong>orthogonal</strong> adjacency. Along a single row or column it means <em>no cell of the other status between any two members of the named status</em>. Clues name innocents as often as criminals. A group of one counts as connected.</dd>
           <div class="trap">Two graphs on one board. Diagonal cells are neighbors but are never directly connected.</div>
         </div>
         <div class="term"><dt>above / below</dt><dd>Anywhere in the same column. <span class="co">left</span> / <span class="co">right</span>: anywhere in the same row.</dd></div>
@@ -578,6 +578,7 @@ section[id],div[id]{scroll-margin-top:14px}
             <tr><td>k of the N criminals neighboring X are in row R</td><td class="k">c(N(X)) = N · c(N(X) ∩ R) = k · c(N(X) ∖ R) = N − k</td><td>Thu: 4 of the first 7 moves</td></tr>
             <tr><td>Only 1 of the N criminals neighboring X is Y's neighbor</td><td class="k">c(N(X)) = N · c(N(X) ∩ N(Y)) = 1</td><td>Wed: four clues. The intersection excludes X and Y themselves</td></tr>
             <tr><td>Exactly 2 of the 4 innocents neighboring X are below Y</td><td class="k">i(N(X)) = 4 · i(N(X) ∩ ↓Y) = 2</td><td>Tue: ↓Y is Y's column, so the set was 2 cells</td></tr>
+            <tr><td>Both innocents in row 4 are connected</td><td class="k">i(R4) = 2 · the two are line-neighbors</td><td>Sun: with A4 known, B4 is its only neighbor in the row, and C4, D4 are criminal. Opened the board twice</td></tr>
             <tr><td>Freya is one of 2 innocents in column B</td><td class="k">B2 ∈ I · i(B) = 2</td><td>Mon: a placement and a line count</td></tr>
           </tbody>
         </table>
@@ -598,6 +599,8 @@ section[id],div[id]{scroll-margin-top:14px}
         <li><strong>Line comparatives.</strong> For "more criminals in row 1 than row 4", pin whichever side is known and treat the other as a floor or a ceiling. "Column C has more criminals than any other" is strict, so a tie fails.</li>
         <li><strong>Parity rules out the uniform case.</strong> Tuesday's hardest step: row 5 had to be two and two or all criminal, and "an odd number of innocents in row 5 neighbor Thor" cannot be met by zero innocents.</li>
         <li><strong>Edge totals are endgame tools.</strong> Count what is already fixed among the 14 edge cells. With a few cells left, the total usually narrows them to a two-way split that another clue settles.</li>
+        <li><strong>"Only one column has exactly k."</strong> Write every column's count as the known part plus its open cells. Usually only one column can still reach k, and it must.</li>
+        <li><strong>Equal line totals.</strong> "Rows 1 and 2 have equally many innocents" works like an equal neighbor count: drop what both sides share, subtract pairs, and each side shrinks to one or two unknowns.</li>
         <li><strong>Groups inside a line.</strong> Subtract a group's known count from the line total and the rest of the line is often determined: column A needing at least 3 criminals, with exactly one among A1–A3 and A4 criminal, forces A5.</li>
       </ul>
     </section>
@@ -1041,12 +1044,12 @@ They share Barb, so <b>Nancy, Barb and Phil carry one innocent-neighbor count be
       <p style="margin-top:14px">Colors used at peak: <strong>three</strong>, which is what the corner tap offers before wrapping. The color budget is a hard limit, not a stylistic preference.</p>
     </section>
 
-    <div class="part" id="part-field"><b>Field test</b> <i>/</i> Sep 21–24 2026 · Easy to Tricky</div>
+    <div class="part" id="part-field"><b>Field test</b> <i>/</i> Sep 21–27 2026 · Easy to Brutal</div>
 
     <section class="p" id="field-test">
-      <h2>Field test: four dailies</h2>
-      <p class="sub">Monday to Thursday · 76 placements · no hints · no blocked taps</p>
-      <p>To check which parts of this manual matter on ordinary days, the Monday to Thursday dailies of one week were played through with the manual at hand and every step logged with the technique that forced it.</p>
+      <h2>Field test: five dailies</h2>
+      <p class="sub">Monday to Thursday, plus Sunday · 95 placements · no hints · no blocked taps</p>
+      <p>To check which parts of this manual matter, the Monday to Thursday dailies of one week, and that week's Brutal Sunday, were played through with the manual at hand and every step logged with the technique that forced it.</p>
       <div class="scroll">
         <table class="t">
           <thead><tr><th>Day</th><th>Rating</th><th>What decided it</th></tr></thead>
@@ -1055,13 +1058,14 @@ They share Barb, so <b>Nancy, Barb and Phil carry one innocent-neighbor count be
             <tr><td class="k">Tue 22</td><td>Medium</td><td>"Both" as exactly 2, row floors and uniqueness, parity ruling out the all-criminal case, and "the most" as strict</td></tr>
             <tr><td class="k">Wed 23</td><td>Medium</td><td>Two differ-pairs, open for most of the solve, fed seven placements; the "only 1 of the N criminals neighboring X" shape four times</td></tr>
             <tr><td class="k">Thu 24</td><td>Tricky</td><td>Splitting "k of the N criminals neighboring X" (four of the first seven moves), pair subtraction, then two differ-links composed into a same-link plus the edge total for the last five cells</td></tr>
+            <tr><td class="k">Sun 27</td><td>Brutal</td><td>"Both … connected" for the first six placements; one chain of four differ-pairs, never tagged, fed parity, a column floor, the edge total and a column equality before collapsing on the last placement</td></tr>
           </tbody>
         </table>
       </div>
       <ul class="rules" style="margin-top:14px">
-        <li><strong>No stalls.</strong> Every placement was forced by a recently revealed clue plus the open pairs. The only case split was a two-way endgame on Thursday.</li>
+        <li><strong>No stalls, even on Brutal.</strong> Every placement was forced by a recently revealed clue plus the open pairs. The only case splits were a two-way endgame on Thursday and a three-way one on Sunday.</li>
         <li><strong>Three ideas did most of the work:</strong> shrinking a clue to two or three cells by intersection, subtracting open pairs, and splitting compound clues. None of them needs a tag or a ledger.</li>
-        <li><strong>Unused:</strong> the elbow rule, connector cost, the overlap squeeze, the tag banks and the ledger. That confirms they are Hard-and-up tools. It says nothing about whether they are needed there.</li>
+        <li><strong>Unused:</strong> the elbow rule, connector cost, the overlap squeeze, the tag banks and the ledger, on the Brutal board as well. What Brutal added was length: a longer chain of pairs, used against more clues. One Brutal board is thin evidence, so these tools stay in the manual.</li>
       </ul>
     </section>
 

@@ -22,7 +22,7 @@ reading any one of them.
 - **Worked example** — the daily of 9 September 2026 solved in full, twenty placements, each one
   accepted by the game on the first attempt.
 
-- **Field test** — the Monday–Thursday dailies of 21–24 September 2026, played with the manual
+- **Field test** — the Monday–Thursday dailies of 21–24 September 2026 and the Brutal Sunday of the 27th, played with the manual
   at hand, and which techniques each one needed. The step-by-step logs are in [`field-test/`](field-test/).
 
 Most examples use the 9 September board, so the cast is shared; the compound-clue and line-total
