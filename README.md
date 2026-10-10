@@ -16,8 +16,11 @@ reading any one of them.
   a paper ledger alongside the app; and the procedure to run when a board stalls.
 - **Worked example** — the daily of 9 September 2026 solved in full, twenty placements, each one
   accepted by the game on the first attempt.
+- **Field log** — the dailies of 5–10 October 2026, Easy to Hard: the opening and deciding step of
+  each, the patterns that repeated, and the one blocked tap with its cause.
 
-Every example in the manual uses that same board, so the cast is shared throughout.
+The worked examples in the Basics and Advanced sections use the September board, so the cast is
+shared there. Examples drawn from the October boards are labeled with their date.
 
 ## How it's built
 
