@@ -21,12 +21,14 @@ reading any one of them.
   and the procedure to run when a board stalls.
 - **Worked example** — the daily of 9 September 2026 solved in full, twenty placements, each one
   accepted by the game on the first attempt.
-
 - **Field test** — the Monday–Thursday dailies of 21–24 September 2026 and the Brutal Sunday of the 27th, played with the manual
   at hand, and which techniques each one needed. The step-by-step logs are in [`field-test/`](field-test/).
+- **Field log** — the dailies of 5–10 October 2026, Easy to Hard: the opening and deciding step of
+  each, the patterns that repeated, and the one blocked tap with its cause.
 
 Most examples use the 9 September board, so the cast is shared; the compound-clue and line-total
-examples come from the field-test boards.
+examples come from the field-test boards, and examples from the October boards are labeled with
+their date.
 
 ## How it's built
 

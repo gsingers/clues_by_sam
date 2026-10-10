@@ -355,6 +355,12 @@ section[id],div[id]{scroll-margin-top:14px}
         <li><a href="#takeaways">Results from this board</a></li>
         <li><a href="#field-test">Field test: five dailies</a></li>
       </ul>
+      <p class="grp" style="margin-top:14px"><a href="#part-week">Field log</a></p>
+      <ul>
+        <li><a href="#week-log">Six dailies, Easy to Hard</a></li>
+        <li><a href="#week-patterns">What the week showed</a></li>
+        <li><a href="#week-mistake">The one blocked tap</a></li>
+      </ul>
       <p class="grp" style="margin-top:14px"><a href="#part-references">Reference</a></p>
       <ul>
         <li><a href="#references">Sources</a></li>
@@ -367,7 +373,7 @@ section[id],div[id]{scroll-margin-top:14px}
     <section class="axiom" id="premise">
       <p class="sub">Rule 1</p>
       <h2>Every clue is true — including clues from criminals.</h2>
-      <p>No clue is false, so the puzzle is a constraint satisfaction problem rather than an interrogation. A clue also never expires: one applied on move 3 still constrains the board on move 20, and hard puzzles routinely require re-reading an early clue in light of a later placement. Dim a clue only once it is exhausted, not while it is merely unhelpful.</p>
+      <p>No clue is false, so the puzzle is a constraint satisfaction problem rather than an interrogation. A clue also never expires: one applied on move 3 still constrains the board on move 20, and hard puzzles routinely require re-reading an early clue in light of a later placement. Dim a clue only once it is exhausted, not while it is merely unhelpful. The exception is flavor text — "I wonder who the criminals are…" — which many cards reveal instead of a clue, and which constrains nothing; dim it on sight.</p>
     </section>
 
     <section class="p p--alt" id="loop">
@@ -424,7 +430,16 @@ section[id],div[id]{scroll-margin-top:14px}
         <div class="term"><dt>share</dt><dd>"Have in common." <span class="co">in total</span> means the sum across the named groups.</dd></div>
         <div class="term">
           <dt>the most</dt>
-          <dd>Always <em>uniquely</em> the most — nobody ties.</dd>
+          <dd>Always <em>uniquely</em> the most — nobody ties. "Column A has more innocents than any other column" is an upper bound on <strong>every other column</strong>, one below column A's count.</dd>
+        </div>
+        <div class="term">
+          <dt>the only … with exactly N</dt>
+          <dd>Two facts: the named line has exactly <em>N</em>, and <strong>no other line of that kind does</strong>. The second half is the useful one: a sibling line one cell short of <em>N</em> has its last cell forced.</dd>
+          <div class="trap">The negative half is easy to drop during case analysis, and it is often the clue that kills a branch.</div>
+        </div>
+        <div class="term">
+          <dt>one of N</dt>
+          <dd>"Salil is one of Peter's 4 criminal neighbors" places Salil <em>and</em> fixes Peter's count at exactly 4. It says nothing about Peter. The glossary adds that <em>one of</em> always implies at least two.</dd>
         </div>
         <div class="term">
           <dt>more than</dt>
@@ -616,7 +631,9 @@ section[id],div[id]{scroll-margin-top:14px}
         <li><strong>Parity clues</strong> — a differ-pair flips the required parity of the remainder; a same-pair leaves it untouched.</li>
         <li><strong>Comparative clues</strong> — a pair fixes one side's count outright, leaving a single unknown.</li>
         <li><strong>Exact counts</strong> — a pair consumes exactly one of the quota.</li>
+        <li><strong>Exclusions</strong> — "not exactly <em>N</em>" (the negative half of an <em>only</em> clue) — a pair counts as one, and the last unknown is forced to whichever status moves the total off <em>N</em>.</li>
       </ul>
+      <div class="trap" style="margin-top:12px"><strong>Write the sum out, term by term</strong> — placed cells, then each pair's 1, then the unknown — before reading off the answer. Exclusions are where a dropped term costs the most: one term short and the forced status comes out reversed. Column B holds John (C), Nancy (C) and the Bobby ⊕ Frank pair, and must not hold exactly 3 criminals. That is <b>1 + 1 + 1 = 3</b> already, so Vicky is criminal. Tallied as "2 + Vicky", it reads innocent, and the tap is blocked. <span style="color:var(--ink-3)">(Oct 6 board, from the <a href="#week-log">week log</a>.)</span></div>
       <p style="margin-top:14px"><strong>Pairs compose.</strong> Two differ-pairs that share a cell make their other two cells match: x ⊕ y and y ⊕ z give x ≡ z. Thursday's endgame turned on exactly this. Which clues create a pair is listed under <a href="#links">What makes a link</a>.</p>
       <p style="margin-top:10px"><strong>A pair is useful while unresolved.</strong> Resolving it is not a prerequisite, so apply pairs to live clues as soon as they exist.</p>
     </section>
@@ -682,6 +699,8 @@ They share Barb, so <b>Nancy, Barb and Phil carry one innocent-neighbor count be
         <li><strong>A run with a minimum length has a forced core.</strong> If column D's criminals are connected, include D4 and number at least 3, every possible run (D2–D4, D3–D5 or longer) contains D3, so place it. Slide each window of the required length across the known cell; cells common to all of them are forced.</li>
         <li><strong>The elbow rule is a choice, not a certainty.</strong> Two diagonal criminals in one connected set are joined either through an elbow or by a detour around it, and the shortest detour on a 4-wide board costs five further criminals (B2 to C3 via A2, A3, A4, B4, C4). Check the budget: with fewer than five criminals to spare, an elbow is forced.</li>
         <li><strong>Elbow constraints are "at least one", not "exactly one".</strong> Knowing that at least one of two cells is criminal fixes no relation between them, so the pair cannot later be recorded as a <a href="#links">link</a>.</li>
+        <li><strong>A connected run with a known length has a forced middle.</strong> If a line's run of <em>k</em> must fit inside <em>L</em> free cells, every placement of the run covers the middle <span class="co">2k − L</span> cells, so those are placed now. "Both criminals in row 5 are connected" with D5 innocent puts the run in A5–C5, and <strong>B5 is criminal</strong> under both placements.</li>
+        <li><strong>One exception sits at an end.</strong> "All innocents in column D are connected" plus a count allowing at most one criminal there: a criminal in D2–D4 would split the innocents, so it can only be D1 or D5, and the middle three are innocent. The same check prunes options from a count clue: list the ways to fill the count, and strike each one that breaks a connectivity clue before looking for what the survivors share.</li>
         <li>A <em>not connected</em> clue asserts that a separating line of innocents exists. The board is 4 cells wide, so such walls are short.</li>
         <li><strong>Distance sets a lower bound on headcount.</strong> Connecting two cells requires at least <span class="co gl" tabindex="0" data-tip="Manhattan distance plus one: rows apart, plus columns apart, plus the cell you start from.">|Δrow| + |Δcol| + 1</span> cells of that status.</li>
       </ul>
@@ -873,6 +892,12 @@ They share Barb, so <b>Nancy, Barb and Phil carry one innocent-neighbor count be
             <tr><td>Both X and Y are criminals</td><td class="k">{X,Y} ⊆ C, |{X,Y}| = 2</td><td>exactly 2, not "at least 2"</td></tr>
             <tr><td>Barb has exactly 2 criminal neighbors</td><td class="k">c(N(B1)) = 2</td><td>the 8-graph, and B1 is not in it</td></tr>
             <tr><td>2 of the 5 criminals neighboring Gus also neighbor Keith</td><td class="k">c(N(B2)) = 5 · c(N(B2) ∩ N(B3)) = 2</td><td>two counts; <a href="#compound">compound clue</a></td></tr>
+            <tr><td>Salil is one of Peter's 4 criminal neighbors</td><td class="k">C4 ∈ C &nbsp;·&nbsp; c(N(D3)) = 4</td><td>two facts; nothing about D3 itself</td></tr>
+            <tr><td>Exactly 2 innocents below Eli are neighboring Isaac</td><td class="k">i(↓C1 ∩ N(B2)) = 2</td><td>intersect first; if the intersection has exactly 2 cells, both are placed</td></tr>
+            <tr><td>Only 1 of the 2 innocents above Sofia is Chloe's neighbor</td><td class="k"><span class="gl" tabindex="0" data-tip="Set difference: the cells above B4 that are not neighbors of A1. The two pieces split the 2 innocents 1 and 1.">i(↑B4) = 2 · i(↑B4 ∩ N(A1)) = 1 · i(↑B4 ∖ N(A1)) = 1</span></td><td>split the set in two; the outside piece is often a single cell, and it is placed</td></tr>
+            <tr><td>Only 1 of the 6 innocents neighboring Frank is my neighbor</td><td class="k">i(N(F) ∩ N(me)) = 1</td><td>the speaker can be in N(F) but is never in N(me); drop them from the overlap</td></tr>
+            <tr><td>Row 3 is the only row with exactly 3 innocents</td><td class="k">i(R3) = 3 · i(Rk) ≠ 3, k ≠ 3</td><td>constrains the four other rows</td></tr>
+            <tr><td>Isaac is one of 11 innocents on the edges</td><td class="k">D2 ∈ I · i(E) = 11</td><td>a budget: subtract lines that lie wholly on the edge (columns A and D)</td></tr>
             <tr><td>Exactly 1 doctor has a criminal directly above them</td><td class="k"><span class="gl" tabindex="0" data-tip="Set-builder notation: the cell directly above each doctor, excluding any doctor in row 1, who has no cell above.">c({ x↑ : x ∈ D, x ∉ R1 }) = 1</span></td><td>tag the cells above, not the doctors; row 1 has none</td></tr>
             <tr><td>Henry and Keith share no innocent neighbors</td><td class="k"><span class="gl" tabindex="0" data-tip="Intersection and empty set: no cell is both a neighbor of each of them and innocent.">(N(C2) ∩ N(B3)) ∩ I = ∅</span></td><td>the intersection excludes C2 and B3 themselves</td></tr>
             <tr><td>More farmers than singers are criminals</td><td class="k">c(F) &gt; c(S)</td><td><span class="sym">c(S) = 0</span> is still allowed</td></tr>
@@ -979,8 +1004,11 @@ They share Barb, so <b>Nancy, Barb and Phil carry one innocent-neighbor count be
         <li>Assume <strong>criminal</strong> rather than innocent. Most clues count criminals, so that assumption propagates further.</li>
         <li>Mark everything in the scratch color only.</li>
         <li>Test the connector-cost floor first; count contradictions surface faster than adjacency ones.</li>
-        <li>Contradiction → place the opposite and clear scratch. No contradiction → clear scratch, pick a different branch point.</li>
+        <li>Contradiction → place the opposite and clear scratch. No contradiction → before clearing, run the other branch too (next paragraph).</li>
       </ol>
+      <p style="margin-top:14px"><strong>Branch agreement.</strong> A branch that survives is not wasted. Run the opposite branch as well, and any cell that comes out the same in both is placed, contradiction or not. A differ-pair is the natural branch point, since its two cases are exhaustive.</p>
+      <div class="ex"><u>Example</u>Oct 10: exactly one of Eve and Lucy is innocent. Lucy criminal ⇒ Susan innocent (Olive's count). Lucy innocent ⇒ Eve criminal, and the doctors-vs-guards comparison ⇒ Mary criminal and <b>Susan innocent</b>. Both branches agree → <b>Susan is innocent</b>, and neither one was refuted.</div>
+      <p style="margin-top:12px"><strong>Pick the variable the chain runs through.</strong> When the remaining cells are tied by ⊕ and ≡ links into one chain, a single case split decides the whole chain. On Oct 8 ten cells hung off Ike that way, and assuming Ike criminal left column A with exactly 2 innocents, which an <em>only column with exactly 2</em> clue forbade. That one ⊥ placed all ten.</p>
     </section>
 
     <section class="p" id="stuck">
@@ -993,11 +1021,12 @@ They share Barb, so <b>Nancy, Barb and Phil carry one innocent-neighbor count be
         <li><strong>Subtract every pair's guaranteed contribution</strong> from every live clue that contains one. Most stalls break here.</li>
         <li><strong>Re-run the quota check on every live group.</strong> A satisfied group yields placements, but only if the quota is rechecked. Check containment too: a group inside another of the same count makes the outer group's other cells innocent.</li>
         <li><strong>Sweep every line's complement count.</strong> Look for lines where the innocents, not the criminals, are nearly full.</li>
+        <li><strong>Re-apply every <em>only</em> and <em>most</em> clue to the lines it does not name.</strong> "The only row with exactly 3", "more than any other column": each is a standing constraint on every sibling line, and it bites as soon as one of them is a cell short.</li>
         <li><strong>Re-check each vocabulary term you relied on.</strong> Neighbors vs connected, <em>directly</em> above vs above, edges including corners, "all" vs "any".</li>
         <li><strong>Check the corners.</strong> With three neighbors and two exits, they resolve under constraints that leave the interior untouched.</li>
         <li><strong>Only then, case analysis.</strong></li>
       </ol>
-      <p style="margin-top:14px">One caution: an unsupported tap is blocked, and it is also recorded as a mistake, a yellow square on that person in the shared result. Probing the solver for answers costs a clean result and substitutes its reasoning for yours. Treat a blocked tap as evidence that a step is missing, not as a query.</p>
+      <p style="margin-top:14px"><strong>A blocked tap is a recorded mistake.</strong> The game refuses the placement with "Not enough evidence!" and leaves the card unplaced, but the cell shows <span class="co">🟨</span> instead of <span class="co">🟩</span> in the result grid. The game's check is whether the status is <em>forced</em>, not whether it is correct: the message says at least one other consistent scenario exists, so a lucky guess is blocked too. Probing the solver for answers costs a clean result and substitutes its reasoning for yours. Treat a blocked tap as evidence that a step is missing, never as a query.</p>
     </section>
 
     <div class="part" id="part-example"><b>Example</b> <i>/</i> Sep 9 2026 · Tricky</div>
@@ -1067,6 +1096,48 @@ They share Barb, so <b>Nancy, Barb and Phil carry one innocent-neighbor count be
         <li><strong>Three ideas did most of the work:</strong> shrinking a clue to two or three cells by intersection, subtracting open pairs, and splitting compound clues. None of them needs a tag or a ledger.</li>
         <li><strong>Unused:</strong> the elbow rule, connector cost, the overlap squeeze, the tag banks and the ledger, on the Brutal board as well. What Brutal added was length: a longer chain of pairs, used against more clues. One Brutal board is thin evidence, so these tools stay in the manual.</li>
       </ul>
+    </section>
+
+    <div class="part" id="part-week"><b>Field log</b> <i>/</i> Week of Oct 5 2026</div>
+
+    <section class="p" id="week-log">
+      <h2>Six dailies, Easy to Hard</h2>
+      <p class="sub">113 of 114 placements first try · no hints · one blocked tap</p>
+      <p style="font-size:.92rem">Monday through Saturday of one week, each replayed from a clean board. The opening clue is the one the board starts with. The deciding step is the one that took the longest to find.</p>
+      <div class="scroll" style="margin-top:14px">
+        <table class="t">
+          <thead><tr><th>Board</th><th>Result</th><th>Opening</th><th>Deciding step</th></tr></thead>
+          <tbody>
+            <tr><td class="k">Mon Oct 5<br>Easy</td><td>20 🟩</td><td>"Exactly 2 innocents below Eli are neighboring Isaac": the intersection is exactly C2, C3</td><td>"Vince has more innocent neighbors than Helen". Vince is pinned at 3, and the Chloe ⊕ Donald pair supplies 1 to Helen, so Isaac is criminal</td></tr>
+            <tr><td class="k">Tue Oct 6<br>Medium</td><td>19 🟩 · 1 🟨</td><td>"Exactly 2 criminals in between Frank and Vicky": both cells</td><td>"Column A is the only column with exactly 3 criminals" placed Wally in column C. The same clue on column B produced the blocked tap (<a href="#week-mistake">below</a>)</td></tr>
+            <tr><td class="k">Wed Oct 7<br>Tricky</td><td>20 🟩</td><td>"No innocents below Eric who neighbor Wanda": the intersection is C4, C5</td><td>Quota collision. Innocent cops = innocent sleuths, and with Phil criminal all three cops are criminal, which puts 3 criminals in a column capped at 2. So Phil is innocent</td></tr>
+            <tr><td class="k">Thu Oct 8<br>Tricky</td><td>20 🟩</td><td>"Both criminals in row 5 are connected": forced middle, B5</td><td>One case split on Ike placed the last ten. Branch Ike-criminal breaks "the only column with exactly 2 innocents"</td></tr>
+            <tr><td class="k">Fri Oct 9<br>Tricky</td><td>20 🟩</td><td>"Isaac is one of 11 innocents on the edges": an edge budget of 3 criminals</td><td>Column A took 2 of the budget, leaving 1. With "all innocents in column D are connected", that put D3 and D4 innocent. Branch agreement on Olivia ⊕ Quita then placed three more</td></tr>
+            <tr><td class="k">Sat Oct 10<br>Hard</td><td>20 🟩</td><td>"Exactly 2 of the 4 innocents neighboring Olive are in column A": A3, A5</td><td>Branch agreement placed Susan. Then Lucy-innocent was refuted: Terry's count of 3 and Mary's count of 5 cannot both be met</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="p s7" id="week-patterns">
+      <h2>What the week showed</h2>
+      <p class="sub">Patterns that repeated across boards</p>
+      <ul class="rules">
+        <li><strong>The opener is often an intersection the size of its count.</strong> On three of six boards the first clue named two sets — below Eli and next to Isaac, below Eric and next to Wanda. Their overlap held exactly as many cells as the count, so the clue placed all of them outright. Intersect before counting.</li>
+        <li><strong><em>Only</em> and <em>most</em> clues worked through the lines they did not name.</strong> They appeared on four boards. Every time, the placement came from a sibling line that the clue only bounded.</li>
+        <li><strong>Unresolved pairs carried every board.</strong> Differ-pairs were substituted into parity, comparative, exact and exclusion clues long before they resolved, exactly as in <a href="#pairs">branch-independent contribution</a>.</li>
+        <li><strong>Stated-member clues are free.</strong> "X is one of Y's N criminal neighbors" places X and fixes a neighborhood count. Thursday and Friday each chained three of them, every one a placement plus a new exact count.</li>
+        <li><strong>Case analysis was never deep.</strong> Every split was on one cell or one pair, and closed within a few steps by a refutation or by <a href="#case-analysis">branch agreement</a>.</li>
+        <li><strong>Many cards carry no clue.</strong> On Thursday, half the reveals were flavor text. A board can run on a handful of real clues, which makes re-reading each one more valuable.</li>
+      </ul>
+    </section>
+
+    <section class="p p--alt s5" id="week-mistake">
+      <h2>The one blocked tap</h2>
+      <p class="sub">Tuesday, Vicky (B5)</p>
+      <p>Column B held John and Nancy, both criminal. "Only one innocent above Vicky" had just made Bobby ⊕ Frank, and column B must <em>not</em> hold exactly 3 criminals. The tally was kept in the head as "2 + the pair's 1 + Vicky ≠ 3", and somewhere the pair's 1 fell out. That made Vicky innocent, and the game refused it.</p>
+      <p>Written out, it is <b>1 + 1 + 1 = 3</b> before Vicky. So Vicky has to be criminal, to make 4.</p>
+      <p style="margin-top:12px"><strong>The fix:</strong> on any exclusion clue, write the tally term by term before reading off the answer — <a href="#pairs">now a rule</a>. The deduction was right in kind. Only the arithmetic was wrong, and nothing short of writing it down catches that.</p>
     </section>
 
     <div class="part" id="part-references"><b>Reference</b> <i>/</i> Sources</div>
